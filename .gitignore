@@ -1,0 +1,10 @@
+# Godot
+.godot/
+*.translation
+export_presets.cfg
+.mono/
+data_*/
+mono_crash.*.json
+# editor / OS
+.vscode/
+*.tmp
