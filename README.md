@@ -1,4 +1,4 @@
-# Mi Gaming Game
+# Mi Godot
 
 Godot game. Open THIS folder in VS Code for Claude Code, and in the Godot project manager for the engine.
 Assets come from `mi-gaming-factory` via `python tools/publish_to_game.py <slug>` (run inside that folder).

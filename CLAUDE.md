@@ -1,4 +1,4 @@
-# Mi Gaming Game: Godot project rules
+# Mi Godot: Godot project rules
 
 The game itself (Godot, GDScript). Assets are made elsewhere: `C:\Users\bobo\Documents\mi-gaming-factory` (Blender).
 
