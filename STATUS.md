@@ -45,8 +45,8 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 - **GitHub:** `boboongy/mi-godot` (PRIVATE; `build/` is not in git). Public + GitHub Pages is the owner's call.
 
 ## Next steps (in order)
--2. **RED, fix first: `test_flood_chain` (no walkers): reward stall never frees (30 s; was 2.25 s).** Needs BOTH session-4 edits (npc_jijio WebMerge line + liminal_lighting); either reverted = green; both inert on desktop: suspect an order-sensitive reward-stall bug (not proven). Suite 79/81 (+ flood_swim = 1b).
--1. **WEB SPEED 2 (owner: >= 20 FPS, Chrome, this laptop, all levels; plan OK):** no shadows + feet blob, merge scenery, hide Jijios > 18 m; `tools/web_fps.py`. L3: 672 draws, shadow ~220. **Bug: web flood water BLACK** (mipmaps?).
+-2. FIXED 2026-09-28: L3 reward next to the burst door softlocked (~10 %); reward Jijio passes Jijios till washing. Suite 81/81 (479 s).
+-1. **NEXT: WEB SPEED 2 (owner: >= 20 FPS, Chrome, this laptop, all levels; plan OK):** no shadows + feet blob, merge scenery, hide Jijios > 18 m; `tools/web_fps.py`. L3: 672 draws, shadow ~220. **Bug: web flood water BLACK** (mipmaps?).
 0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look and FPS.
 1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
 1b. `test_flood_swim` queue-home red was intermittent (1 of 1 green this session); the test now prints a per-second TRACE when it fails.

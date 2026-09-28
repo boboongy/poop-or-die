@@ -51,7 +51,8 @@ func _init() -> void:
 		T.check(placed.distance_to(p.global_position) < 0.2, "%s: Bob was not shoved (moved %.2f m)" % [name, placed.distance_to(p.global_position)])
 		p.global_position = Vector3(-3.7, 0.05, 0.4) # Bob walks off (into the stall in the real game): the exceptions must clear themselves
 		await T.wait(self, 0.5)
-		T.check(p.get_collision_exceptions().is_empty() and npc.get_collision_exceptions().is_empty(), "%s: once Bob has left, no collision exception is left behind" % name)
+		# (the Jijio still passes through the other Jijios until it washes: test_toilet_sequence checks that those clear too)
+		T.check(p.get_collision_exceptions().is_empty() and not npc.get_collision_exceptions().has(p), "%s: once Bob has left, no collision exception with him is left behind" % name)
 		lvl.queue_free()
 		await T.wait(self, 0.3)
 	print("INFO  slowest announcement over 20 stalls: %.1f s" % slowest)

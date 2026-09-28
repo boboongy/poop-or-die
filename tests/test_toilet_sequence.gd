@@ -29,9 +29,15 @@ func _init() -> void:
 	while npc.state != 6 and ticks < 60 * 30: # 6 = WASH
 		await T.wait(self, 0.1)
 		ticks += 6
+		if ticks >= 180 and ticks % 120 == 0: # 3 s and still not washing: where the freed Jijio is and what it walks into
+			var hits := []
+			for c in npc.get_slide_collision_count():
+				hits.append(npc.get_slide_collision(c).get_collider())
+			print("INFO  TRACE %.0f s: stall %d state %d at %s next %s hits %s" % [ticks / 60.0, idx, npc.state, npc.global_position, npc._agent.get_next_path_position(), hits])
 	var sink := idx % 10 + 1
 	T.check(npc.state == 6, "the freed Jijio reached the sink and is washing (%.1f s)" % (ticks / 60.0))
 	T.check(npc.anim().current_animation == "wash", "the freed Jijio plays the baked 'wash' clip")
+	T.check(npc.get_collision_exceptions().is_empty(), "washing: the freed Jijio collides with the others again (%d exceptions left)" % npc.get_collision_exceptions().size())
 	T.check(sinks._streams[sink - 1].visible, "tap water is running at sink %d" % sink)
 
 	var f := Vector3(0, 0, 1) if idx < 10 else Vector3(0, 0, -1)

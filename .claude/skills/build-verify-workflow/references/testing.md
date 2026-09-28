@@ -26,6 +26,7 @@ Read this when you write or debug a test. (Moved out of SKILL.md on 2026-09-27; 
 - **Test an E prompt at the EDGE of reach (1.25 m of 1.3), not only close up** (the neighbouring stall door stole it).
 - **A camera/framing test must use the real 16:9 frame and real bones:** headless windows are SQUARE (1152 x 1152), so project for 16:9 yourself (`test_dance_camera.gd` `_on_screen`); follow the head BONE (about 0.82 m, a guessed 1.45 m passed while the shot was bad); count HUD panels as off-screen.
 - **A new system that draws random numbers (even `Sfx` via global `randi()`) changes every seeded test's sequence;** seed new RNGs from the global one (`_rng.seed = randi()`), never `randomize()`. Walker tests are still not fully repeatable: judge them over 3-4 runs.
+- **An unrelated edit turns a test red and reverting it turns it green: suspect a random pick that moved, not the edit.** Print what the stuck thing hits (`get_slide_collision`) and sample the random choice 200 times in the test (2026-09-28: a web-only preload shifted the reward pick next to Level 3's burst-open door, a ~10 % softlock hidden for weeks).
 - Explicit types for Variant values (`var x: float = fl.thing`); `:=` on untyped access is a parse error.
 - Variants: `-- walkers`, `flood` (the flood level; `T.FLOOD_LEVEL` / `T.HIDE_LEVEL` name the swapped levels, never a bare 2 or 3), `dry`, `row1`/`row2`, `multi`, `seeds=N first=K` (see `run.sh`). `T.level()` uses ONE puddle unless `multi`.
 - In a script test, `SceneTree.current_scene = lvl` is needed for `reload_current_scene()` (R, N, F4).

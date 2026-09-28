@@ -172,7 +172,21 @@ func _init() -> void:
 	while waited < 30.0 and not mission_label.text.contains("is free"):
 		await T.wait(self, 0.25)
 		waited += 0.25
+		if waited >= 3.0 and fmod(waited, 2.0) == 0.0: # the reward Jijio should be out by now: where it is stuck and what it walks into
+			for npc in get_nodes_in_group("jijio"):
+				if npc.leaving and npc != story.clogger:
+					var hits := []
+					for c in npc.get_slide_collision_count():
+						hits.append((npc.get_slide_collision(c).get_collider() as Node).get_parent().name)
+					print("INFO  TRACE %.0f s: leaving Jijio state %d at %s next %s hits %s" % [waited, npc.state, npc.global_position, npc._agent.get_next_path_position(), hits])
 	print("INFO  the reward stall was free after %.2f s" % waited)
+	# Every pick, not just this run's one: the burst door swings across a neighbour's doorway, so the reward is never next to it.
+	var near_door := 0
+	for i in 200:
+		var pick: int = lvl.population.pick_free_stall()
+		if absi(pick - story.stall) == 1 and (pick < 10) == (story.stall < 10):
+			near_door += 1
+	T.check(near_door == 0, "the reward is never next to the burst-open door (%d of 200 picks were)" % near_door)
 	await T.wait(self, 9.0 - minf(waited, 9.0))
 	var label := mission_label.text
 	T.check(label.contains("is free"), "reward stall announced ('%s')" % label)

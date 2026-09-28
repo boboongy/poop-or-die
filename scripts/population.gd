@@ -166,12 +166,26 @@ func hide_away(index: int) -> void:
 
 
 ## A random stall Jijio who is still sitting, for the reward (never one in `blocked_stalls`, e.g. the clogged toilet).
+## Never next to an open door either: Level 3's burst-open door swings across the neighbour's doorway (the nav mesh does not know), and
+## the reward Jijio walked into it for good: the stall was never announced free (test_flood_chain, 2026-09-28).
 func pick_free_stall() -> int:
 	var sitting: Array[int] = []
+	var clear: Array[int] = []
 	for i in occupants.size():
 		if occupants[i].is_sitting() and not blocked_stalls.has(i):
 			sitting.append(i)
+			if not _next_to_open_door(i):
+				clear.append(i)
+	if not clear.is_empty():
+		return clear[randi() % clear.size()]
 	return sitting[randi() % sitting.size()]
+
+
+func _next_to_open_door(i: int) -> bool:
+	for n in [i - 1, i + 1]:
+		if n >= 0 and n < _stalls.doors.size() and (n < STALL_COUNT) == (i < STALL_COUNT) and _stalls.doors[n].is_open:
+			return true
+	return false
 
 
 ## Reward: stall `index` opens, its Jijio stands up, walks to the sink in front of that stall's column
@@ -185,6 +199,14 @@ func reward_release(index: int, bob: PhysicsBody3D = null) -> void:
 	if bob != null:
 		npc.add_collision_exception_with(bob)
 		bob.add_collision_exception_with(npc)
+	# ...and every other Jijio until they wash: the Level 3 clogger waiting outside the next stall pinned the reward Jijio in its doorway
+	# for good, and the rampage crowd jammed it in the corridor (test_flood_chain, test_toilet_sequence:floodwalkers, 2026-09-28).
+	var passed: Array[Node] = []
+	for other in get_tree().get_nodes_in_group("jijio"):
+		if other != npc and other is PhysicsBody3D:
+			npc.add_collision_exception_with(other)
+			other.add_collision_exception_with(npc)
+			passed.append(other)
 	door.set_open(true)
 	await get_tree().create_timer(0.4).timeout
 	await npc.stand_up(_stand_spot(index))
@@ -200,6 +222,10 @@ func reward_release(index: int, bob: PhysicsBody3D = null) -> void:
 		settle.tween_property(npc, "global_position", spot, 0.25)
 		await settle.finished
 		npc.start_washing(0.0)
+		for other in passed:
+			if is_instance_valid(other) and is_instance_valid(npc):
+				npc.remove_collision_exception_with(other)
+				other.remove_collision_exception_with(npc)
 		_sinks.set_running(sink, true), CONNECT_ONE_SHOT)
 	npc.go_to(spot)
 	var doorway := Vector3(door.point.x, 0.0, door.point.z)
