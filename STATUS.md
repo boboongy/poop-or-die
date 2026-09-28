@@ -45,6 +45,7 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 - **GitHub:** `boboongy/mi-godot` (PRIVATE; `build/` is not in git). Public + GitHub Pages is the owner's call.
 
 ## Next steps (in order)
+-1. **WEB BUILD FIX (owner report 2026-09-28, plan sent, awaiting yes):** github.io = 7 FPS, overexposed, flood water invisible; target = the Forward+ editor look. `tests/probe_compat_fps.gd` (L3, 1 run each): 9 FPS; 10 spot shadows off 24; + 3D scale 0.75 28; + 36 characters hidden 60. Water suspect (untested): shader depth 0..1 vs Compatibility -1..1. Republish: HISTORY 2026-09-28 "GitHub".
 0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look (Bob's back still dark there) and FPS.
 1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
 1b. `test_flood_swim` queue-home red was intermittent (1 of 1 green this session); the test now prints a per-second TRACE when it fails.
