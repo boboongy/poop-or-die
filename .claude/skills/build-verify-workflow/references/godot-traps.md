@@ -1,0 +1,15 @@
+# GDScript / Godot 4.7 traps met so far
+
+Read this when the symptom matches a heading word (types, lambdas, AnimationPlayer, freed objects, gates, headroom, navigation). (Moved out of SKILL.md on 2026-09-27.)
+
+- **Types:** `:=` fails when the value is a Variant (dictionary lookups, arrays, `find_children`, untyped node access): write the type. Assigning an untyped array to a typed `Array[int]` through an untyped reference fails: use `.assign([...])`.
+- **A lambda cannot reassign a captured local:** use a one-element array or a member (twice: a `pressed := false` flag set in a callback never changed outside it; a polling loop hung silently). Grep any new `:= func` that assigns an outer local.
+- **AnimationPlayer:** (a) clips advance on the RENDER frame by default; when logic must match a clip frame set `callback_mode_process = ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS` and restore it. (b) `speed_scale = 0` freezes the BLEND too: cut a tiny looping clip instead (`fight.gd` `_slice`). Only a screenshot at the contact moment shows either. Models face +Z, their right is -X; `player.posing` = another script owns Bob's AnimationPlayer.
+- **Freed objects:** anything bound to a timer/signal callback or held across an `await` can be freed first: take it UNTYPED and check `is_instance_valid` (twice). Read the FINAL output of `stop_project` too.
+- **Gates:** before bypassing a `busy`/`frozen`-style gate for a new state, grep every place that flag is checked (2026-09-23: `player.posing` skipping the scan let the stall door behind Bob become E-able). A narrow allow-list beats a blanket bypass.
+- **Headroom:** anything that lifts a body off the floor (swim, float, jump) needs a headroom probe of the whole map first (the 2.1 m lintel over the waiting-room doorway; `tests/probe_flood_headroom.gd`). A lintel is thin: sample several points ahead.
+- **Navigation:** check the baked mesh height, cell size vs the narrowest doorway, agent radius, then test every destination.
+- **Missions:** a `const` declared in the mission base class must not be redeclared in a subclass (the mission silently fails to load).
+- **One-shot particles made in code:** a new `CPUParticles3D` has `emitting = true`, so it fires at the origin before you place it and `finished` frees it unseen (2026-09-27, the shooter's splash: tests counted splashes, the screenshot showed none). Create with `emitting = false`, place, then `restart()`; check it with a frame-by-frame windowed shot (`tests/shot_shooter_splash.gd`). Also: a line-of-fire ray needs layer 2 (walkers) as well as 1.
+- **Hiding a node does not take it out of its groups:** a walker with `visible = false` and processing off still offered "E talk" (the player scans the "interactable" group, not visibility). A mode that hides things must also take them out of the group and put them back after (2026-09-27, the shooter; my first fix cleared the WRONG nodes and only a sabotage run showed its check could not go red).
+- Use `preload("res://...")` constants, not `class_name`, in test/headless scripts. Cross-scene state goes in a static var; `project.godot` is editor-owned, so no autoload.

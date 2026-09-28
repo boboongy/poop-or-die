@@ -1,9 +1,58 @@
-# Game: STATUS
+# Game: STATUS (current state only)
 
-Read this first in every new session. Update it at the end of every stage.
+Read this first in every new session, then SPEC.md ("Round 2", and the level you touch) and FACTORY_TODO.md (what the owner still makes in Blender). Full chronological log: HISTORY.md (append history there, keep THIS file short, rewrite it at the end of each stage).
+Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core + `references/` topic files, split 2026-09-27). **Four project hooks** (`.claude/settings.json`, scripts in `.claude/hooks/`): SessionStart injects the skill's sections 0-1 + this file's head, Snapshot, Next steps, Open decisions (under 9,000 characters, checked by `tests/check.sh`); UserPromptSubmit injects the reminder; Stop blocks once if code changed since the last full passing `bash tests/run.sh` (that run writes `.claude/last_full_run.json`) and once to ask for the retro; PostToolUse on Write/Edit rejects hidden control characters.
+**Notifications:** phone sound DROPPED (owner: "don't care anymore"). Laptop sound + ntfy push work.
 
-- **Phase:** empty skeleton (2026-09-19). No Godot project yet, no game design written.
-- **Ready to publish from the factory:** bob-character, jijio-character, toilet-environment (all validated, none published yet).
-- **Next:** (1) create the Godot project in this folder (Godot project manager); (2) decide the game brief/spec (`SPEC.md`, spec-lite); (3) publish the first assets and import-check them.
-- **Open questions:** Godot version; game type/camera; player character choice; whether the toilet is the first level.
-- **Untested:** every asset's import into Godot (collision `-convcolonly`, scale, materials).
+## Snapshot (2026-09-28)
+- **Phase:** ALL 5 levels built; round 2 Stages 1-4 DONE (Stage 5 mobile ON HOLD). **Round 3 planned (SPEC "Round 3", owner playtest 2026-09-27, all DECIDED): Stage 6 sound, 7 gameplay (swap L2/L3, dance feedback, Street Fighter keys), 8 web test build, 9 online scoreboard.** **DONE 2026-09-28:** Stage 6 sound, 6b, **6c (queue talks/clips, shouted missions, solid Jijios, WASD+Space fights), 6d (shat pants on every loss), 7 (L2/L3 swap, dance feedback E1, fight keys), 8 web build (`build/web`, NOT seen in a browser)** (HISTORY). **NEXT = owner playtest of all of it, then Stage 9 scoreboard.**
+- **Engine:** Godot 4.7.2 (GDScript, Forward+, Jolt). Editor exe `C:\Godot\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64.exe`; console `..._console.exe`. Godot MCP works. ffmpeg on PATH; Python 3.12 with `piper-tts` 1.8; voice models in `%LOCALAPPDATA%/piper-voices`.
+- **Run:** MCP `run_project` with `res://scenes/level_toilet.tscn`. **F4 = next level (1->2->3->4->5->1)**; win a level and press N. **Tests:** `bash tools/session_start.sh` = tools + baseline (skipped when no code changed since the last full pass; `--full` forces it); `bash tests/run.sh` (81 files, parallel + `--fixed-fps 60`, about 6-13 min; per-test timeout 480 s; a `[done]` line per file, only failed files' checks at the end, `VERBOSE=1` for all); `--about WORD` = only tests whose file mentions WORD; `--slow` adds `test_all_stalls_sink`; `bash tests/check.sh` = parse-only (runs first). `tests/_template.gd` = new-test skeleton. `run.sh` fails a file that prints SCRIPT ERROR or **VOICE MISSING**. Test args: `walkers`, `level2`, `dry` (Level 2 without the flood), `intro`, `row1`/`row2`.
+
+## Level 2 "The flood" map (Stage 3)
+- `flood_water.gd` (+ `flood_water.gdshader`): one sheet over the whole floor at `depth`; `add_source/remove_source/running_count`, RATE_PER_SOURCE 1.6/300 m/s (5 sources = 1.6 m in ~60 s), holds at MAX_DEPTH 1.6, `start_drain` only with 0 sources (12 s), trickle spreads from the sources until COVER_DEPTH 0.06; underwater = fog + tint + a low-pass on Master that is added ONCE and only enabled/disabled; `rise` loop 2D louder with depth.
+- `flood_story.gd`: setup picks the clogged stall (0-19) and 4 sinks (`force_stall`/`force_sinks` for tests, `auto_start` off = dry level); `blast()` in the intro; `start()` at GO: door open, toilet source + trickle, rampage (queue + walkers + clogger, staggered 0.07 s, they pass through Bob; 4 slap taps on, forced at 10 s). Tasks: plunger (floats 0.8 m outside the door) -> hold E 3 s at the toilet; E per running tap; plug at DRAIN_POS (-4.6, -1.2); deep water = automatic dive (`_dive_down/_dive_up`, `player.set_dive_view`). After the drain: 4 residue puddles (`flood.gd start_residue`), queue home (pass through each other), walkers `resume_all`, clogger by its door.
+- Missions: `plunge_toilet`, `taps_off`, `pull_plug` (needs both), `flood_find_mop` (mop at MOP_POS), `mop_flood`. Intro `intro.gd _flood_intro` (FLOOD_BOB/QUEUE/SCREAM/CROWD). Sounds `tools/make_flood_sounds.py` (all made here), events in `sfx.gd` (per-event `max_db` now possible).
+- Player: `water`, `swimming`, `diving`, WADE 0.15-0.75 m (to 55 % speed), swim 2.2 / Shift 3.0 m/s, FLOAT_DEPTH 0.62 (the BODY's feet; its 1.3 m capsule ducks under low ceilings via `float_target()`), camera kept 0.15 m over the surface. **Factory swim clips (Stage 6 Slice A): their origin is the WATER SURFACE, so the model is lifted (`_lift`) to the surface; `swim` moving (x hspeed/0.7, max 2), `tread_water` still; dives `duck_dive` -> `swim_under` (DIVE_LIFT 1.2), `dive_surface()` cross-fades to `swim`.** NPC: `floating` (`_start_float/_float/_end_float`, layer 0 + pushed aside by Bob): queue/walkers `swim_panic`, occupants `tread_water`, every 4th `float`; occupants sit again after. `leaving` = in the stand_up clip. Heights: `tests/probe_swim_clips.gd`; look: `tests/shot_swim_clips.gd`.
+- Tests: `test_flood_water`, `test_flood_tasks:row1/:row2` (all 20 stalls, all 10 sinks, shallow + deep), `test_flood_swim` (walkers, float line per frame, 34 Jijios, swim route, ducking, landing), `test_flood_chain` (+`:walkers`, intro to reward). Probes (windowed): `probe_flood_look`, `probe_flood_flow`, `probe_flood_sound` (SND event log), `probe_residue_look`, `probe_flood_headroom`. Bot: `measure_level2_time.gd -- all walkers`.
+
+## WATER WAR (Stage 4, Level 4 round 3)
+- `shooter.gd` (the fight: `begin_war`, intro, gun, tank + sink refill, hose, barks, win/K.O., arena built and undone by `abort()`), `shooter_enemy.gd` (bone hitboxes, AI at COVERS along U_PATH), `shooter_hud.gd`, `shooter_props.gd`. `cutters.gd` starts it after BOSSY's argument and calls `abort()` when it ends. Old `water_fight.gd` is in `retired/` (Godot-ignored).
+- Tests: `test_shooter_gun/feedback/ai/arena/ult`, `test_cutters`, `test_level4_chain` (war by `tests/war_bot.gd`), `test_level4_fail`. Not in the suite: `measure_level4_time.gd` (PERFECT / "HUMAN" war bot), `shot_level4_chain.gd`, `shot_shooter*.gd`, `probe_shooter_sound.gd` (part d = barks + hose).
+
+## Voices + soundscape (Stage 2, short)
+- `tools/make_voices.py` after ANY dialogue change (finds `.say(`/`.choose(`/`.bubble(` calls; write constants out in the call, `l[1]` is not followed; `--redo=cast,cast` re-renders only those casts); casts in the tool AND `dialogue.gd CAST_OF_WHO`. `ambience.gd`: hum, the bed loop, the gibberish crowd, a random stall/tap sound every 1-3 s (max 3; half as often and -8 dB in fights and the start dialogue, NONE in the dance battle), Bob's holding-it groans. `level_toilet.ensure_limiter()`. `python tools/peaks.py <wav> -3`.
+- Stage 6 sound tools: `tools/make_cartoon_sounds.py` (steps, mop, strokes, wipe, tear, poop blast, tummy, `bed_loop`), `tools/make_character_sounds.py` (`audio/grunts/`: OOFs, KO groans, Bob's ouch/groans, complaints; `gibberish_loop`), `tools/sound_levels.py --check EVENTS` (each event's peak, floor -12 dB; `tests/test_action_sounds.gd`). Mix probes log SND lines incl. bubble voices (`probe_flood_sound`, `probe_level5_sound`). Old files in `retired/audio_stage6/`. Review folder for the owner: `sound_review/` (Godot-ignored).
+
+## Facts that cost time to learn (do not relearn)
+- **Stall doors line one wall of each corridor** (row 1 door line z -1.02, row 2 z -4.08). An OPEN door's leaf reaches 0.65 m into the corridor; the navmesh does not know it (the timer bot stood pinned on it 40 s). A roaming NPC near a door steals its E prompt unless its `priority` is negative.
+- **The waiting room's doorway into the toilet has a 2.1 m lintel** (x about -0.1, z -0.6..0.5): anything floating higher must duck. Ceiling elsewhere 2.8 m; stall walls/doors 0.30-1.80 m.
+- **Queue snake:** 3 lines 1.1 m apart, spots 0.8 m apart; Bob starts at about (-3.7, 0.4); the waiting room's free part is x < -4.2.
+- **Godot 3D sounds get louder than their volume up close** (capped by `Sfx.MAX_3D_DB`, or the event's `max_db`). Measure loudness on both channels, several runs, and log which events start when.
+- **Adding/removing a bus effect mid-game rebuilds every effect on that bus** (an AudioEffectRecord lost its recording): add once, toggle with `set_bus_effect_enabled`.
+- **Walker tests are NOT fully repeatable even with the same seed** (2026-09-27: `test_walker_doors:l2dry` failed 1 run in 3, a different stall each time): judge a walker check over 3-4 runs, not one.
+- **Anything that draws from the global RNG changes seeded tests' sequences;** use the instance id or a fixed index for spreads (footsteps' start offset).
+- **Bob T-poses in every conversation** (pre-existing; ask the owner). Clips: a held pose is a tiny looping clip, never `speed_scale = 0`; models face +Z, their right is -X. `player.posing` = another script owns Bob's AnimationPlayer.
+- **Music timing must use the audio clock** (`dance.gd song_time()`).
+
+## Verification status (2026-09-28 session 2; older in HISTORY)
+- **Run:** new tests `test_queue_fidget`, `test_mission_shouts`, `test_shat_pants` + updated fight/dance/walker tests; full suite: see the last line of HISTORY's session-2 entry. Sabotage seen red: fidget stop, sweep route.
+- **Seen (windowed):** the patch spreading (kick-out, cut camera + close-up), 2X / 5X COMBO + confetti + crowd shouts, the web renderer's look per level (native gl_compatibility).
+- **NOT verified:** the game in a real browser (only boot + no console errors); EARLY/LATE on screen; the new sounds/voices heard; web FPS on the owner's PC (this laptop: 9-14 native Compatibility); any Felt item.
+
+## Build and share
+- **Web build:** `"<console exe>" --headless --path . --export-release "Web" build/web/index.html` (templates in `%APPDATA%/Godot/export_templates/4.7.2.stable`, web files only). Try it: `python -m http.server 8000 -d build/web`, open http://localhost:8000. `python tools/web_smoke.py <dir>` = headless-Chrome check.
+- **GitHub:** `boboongy/mi-godot` (PRIVATE; `build/` is not in git). Public + GitHub Pages is the owner's call.
+
+## Next steps (in order)
+0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look (Bob's back still dark there) and FPS.
+1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
+1b. `test_flood_swim` queue-home red was intermittent (1 of 1 green this session); the test now prints a per-second TRACE when it fails.
+1c. **Stage 9 scoreboard** (SPEC; Talo needs the owner's account/API key: ask first), then Stage 5 mobile (on hold).
+2. **Remind the owner:** the older playtests (toilet sequence + walk pace, Level 5 numbers, Level 2, Level 4 WATER WAR aim/difficulty/150 s) still have open numbers, and a look at Slice A (swimming, the tissue grab, the orange Level 1 roll, the boombox).
+3. Cosmetic: a floating Jijio's head can fill Bob's camera in deep water (Seen 2026-09-28, `shot_jijio_walls` shot 2); carried over: reward-stall camera in Levels 1/2; shout bubble size; squashed camera during the cutter argument; walkers after the dance battle; crowd shouts over her lines.
+4. Factory: FACTORY_TODO R1b `surface` clip (asked 2026-09-28), R2-R5 (plunger, drain, tap handles, Jijio story clips); rows 4-5 as before.
+
+## Open decisions (owner)
+Stage 6 sound: (b) no random background sounds during the dance battle (they clipped it), the bed only: not answered yet. (Step next to the boombox and bed level: superseded by 6b A/B; re-measure.)
+Level 4: 150 s with WATER WAR (bots used 54-84 s); the war's PROPOSAL numbers. Level 2: should a fast player ever swim (e.g. faster rise, or taps that come back on)? 150 s; the leftover puddle look; the water colour. Carried: Level 5 timer; FLURRY damage; Level 4/5 PROPOSAL numbers; Bob's walk pace; Bob's T-pose in talks; Stage 2 sound levels.

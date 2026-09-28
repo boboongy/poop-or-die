@@ -1,0 +1,77 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/session_start.py\"",
+            "timeout": 15,
+            "statusMessage": "Loading project state (STATUS.md + top rules + session checklist)..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/prompt_reminder.py\"",
+            "timeout": 10,
+            "statusMessage": "Skill reminder..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/stop_guard.py\"",
+            "timeout": 15,
+            "statusMessage": "Checking tests are fresh..."
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/toast.ps1\" -Message \"Claude finished - your turn\"",
+            "timeout": 15,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/check_control_chars.py\"",
+            "timeout": 15,
+            "statusMessage": "Checking the file for hidden characters..."
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$json = Get-Content \"$env:USERPROFILE/.claude/settings.json\" -Raw; if ($json -match 'https://ntfy\\.sh/[A-Za-z0-9_-]+') { $topic = $matches[0]; try { Invoke-RestMethod -Uri $topic -Method Post -Body 'Claude needs you (mi-godot)' -Headers @{Title='Claude Code: mi-godot'; Priority='high'} -TimeoutSec 5 | Out-Null } catch {} }",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/toast.ps1\" -Message \"Claude needs you (a question or a permission)\"",
+            "timeout": 15,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}

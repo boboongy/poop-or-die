@@ -1,0 +1,1772 @@
+{
+ "bob": {
+  "0598342a66": {
+   "seconds": 3.071,
+   "text": "Whoa, is that a spider on your back? Let me get it..."
+  },
+  "076fd6f3a8": {
+   "seconds": 1.421,
+   "text": "Whoa, look over there!"
+  },
+  "07f3b96346": {
+   "seconds": 1.15,
+   "text": "Not my problem."
+  },
+  "10b03f9693": {
+   "seconds": 1.549,
+   "text": "Move it or lose it."
+  },
+  "21fa3fa7d9": {
+   "seconds": 2.221,
+   "text": "I was here first. Back of the line!"
+  },
+  "28f0f064dc": {
+   "seconds": 2.951,
+   "text": "I really need to go! Can I go first? Please?"
+  },
+  "2db63b066f": {
+   "seconds": 1.701,
+   "text": "Nobody owns a toilet."
+  },
+  "32599a78d2": {
+   "seconds": 1.781,
+   "text": "The queue starts back there, buddy."
+  },
+  "360753af98": {
+   "seconds": 2.415,
+   "text": "I really need to go! Pretty please?"
+  },
+  "380e75203c": {
+   "seconds": 2.844,
+   "text": "It's my birthday! Birthday Bob goes first!"
+  },
+  "51a3b9373f": {
+   "seconds": 4.24,
+   "text": "YOU! It was you, wasn't it? You smell like a sewer that's been dead for a hundred years!"
+  },
+  "58cdc0611d": {
+   "seconds": 3.305,
+   "text": "Just let me squeeze in, I'm bursting!"
+  },
+  "60eab1e9eb": {
+   "seconds": 2.335,
+   "text": "Your crew is on the floor. You're next."
+  },
+  "6f3c2b67ee": {
+   "seconds": 2.849,
+   "text": "Please, I really, really need to go!"
+  },
+  "72a0e870a4": {
+   "seconds": 1.658,
+   "text": "I'm a VIP. Let me through."
+  },
+  "73d7beebd3": {
+   "seconds": 3.182,
+   "text": "Shhh! Please keep quiet. Please!"
+  },
+  "7a5c27e828": {
+   "seconds": 1.581,
+   "text": "I really, REALLY need to go."
+  },
+  "7d0bcd31bd": {
+   "seconds": 1.212,
+   "text": "It's an emergency!"
+  },
+  "7e6250f93d": {
+   "seconds": 1.963,
+   "text": "Nice try, sneaky."
+  },
+  "8a0caf2c17": {
+   "seconds": 1.752,
+   "text": "Excuse me, there's a queue."
+  },
+  "9e070cea90": {
+   "seconds": 2.324,
+   "text": "Get out of my way, I'm hiding in here."
+  },
+  "acb3e6a92d": {
+   "seconds": 2.909,
+   "text": "I really need to go! Can I just slip in ahead of you?"
+  },
+  "b4236ecd67": {
+   "seconds": 1.106,
+   "text": "SUPER SOAKER!"
+  },
+  "c40265967d": {
+   "seconds": 2.483,
+   "text": "Let me go first. I was here before you."
+  },
+  "caaccb6329": {
+   "seconds": 2.091,
+   "text": "Oh no. I'm gonna need a plunger."
+  },
+  "cb0b38d213": {
+   "seconds": 1.984,
+   "text": "I saw you. Get out of the line."
+  },
+  "d760bcbefe": {
+   "seconds": 4.074,
+   "text": "Excuse me! Coming through! Tiny bladder, very important!"
+  },
+  "dbadb7dcac": {
+   "seconds": 1.896,
+   "text": "Hey, isn't that your friend at the front?"
+  },
+  "f15fa2d15f": {
+   "seconds": 1.657,
+   "text": "Nice moves... for a beginner."
+  },
+  "f8d2e5cc23": {
+   "seconds": 2.17,
+   "text": "Yes, I'll find some tissue."
+  },
+  "fefc3f537c": {
+   "seconds": 3.885,
+   "text": "EWWW! What is THAT smell?! Did something crawl in here and DIE?"
+  }
+ },
+ "bossy": {
+  "0484d4edc2": {
+   "seconds": 1.796,
+   "text": "Deal with my crew first, shorty!"
+  },
+  "0a57cc4fa6": {
+   "seconds": 0.676,
+   "text": "MY SHIRT!"
+  },
+  "0d67d44fe5": {
+   "seconds": 1.987,
+   "text": "Outta my way, shorty! I'm going first."
+  },
+  "2d2d34a6aa": {
+   "seconds": 1.073,
+   "text": "Oh yeah? Make me!"
+  },
+  "54ff65701a": {
+   "seconds": 2.694,
+   "text": "You beat my crew? Cute. CREW! BROWN WATER, NOW!"
+  },
+  "76882eef0d": {
+   "seconds": 1.539,
+   "text": "Then I'll just have to shut you up!"
+  },
+  "76cf48409a": {
+   "seconds": 0.659,
+   "text": "COVER ME!"
+  },
+  "a2b22632c5": {
+   "seconds": 2.916,
+   "text": "Shhh... nobody saw me slip in, right?"
+  },
+  "a2e41d0279": {
+   "seconds": 0.603,
+   "text": "EAT BROWN!"
+  },
+  "a3dd3b89a1": {
+   "seconds": 1.831,
+   "text": "I own this toilet. Everybody out!"
+  },
+  "e3e4468675": {
+   "seconds": 0.723,
+   "text": "THERE HE IS!"
+  }
+ },
+ "ghost": {
+  "4e8a0a559b": {
+   "seconds": 1.863,
+   "text": "A HUNDRED YEARS."
+  },
+  "648241db6a": {
+   "seconds": 3.159,
+   "text": "If they find you... you're MINE. Hee hee hee..."
+  },
+  "ea98a8685c": {
+   "seconds": 6.112,
+   "text": "Let's play a game, Bob. Everyone in here counts to twenty... and you HIDE."
+  }
+ },
+ "jijio_a": {
+  "006b7457fc": {
+   "seconds": 3.242,
+   "text": "Stop breathing on my neck. Oh, it's you. Still stop."
+  },
+  "03317b5877": {
+   "seconds": 1.304,
+   "text": "Are you going to help them?"
+  },
+  "03581d3086": {
+   "seconds": 3.565,
+   "text": "Back of the line, pal. Oh, you're already behind me. Good."
+  },
+  "0628d294dd": {
+   "seconds": 2.451,
+   "text": "My knees are crossed so tight they've merged."
+  },
+  "06bac6e523": {
+   "seconds": 4.5,
+   "text": "I've made friends with everyone in this queue. Except him. He knows what he did."
+  },
+  "0a57cc4fa6": {
+   "seconds": 0.635,
+   "text": "MY SHIRT!"
+  },
+  "0b7ccd9b23": {
+   "seconds": 2.629,
+   "text": "Everyone in this queue is an emergency, pal."
+  },
+  "0bd29a9406": {
+   "seconds": 0.457,
+   "text": "WOOO!"
+  },
+  "0c391e8723": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "0db8d9b011": {
+   "seconds": 7.612,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "0e84293b6c": {
+   "seconds": 7.612,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "0ee88a09e0": {
+   "seconds": 4.089,
+   "text": "You want MY place? Do you know how long I've been waiting for this toilet?"
+  },
+  "155d9fe4d1": {
+   "seconds": 8.012,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "15db0f8fc1": {
+   "seconds": 1.126,
+   "text": "FIND ANOTHER WAY IN!"
+  },
+  "17db6268fb": {
+   "seconds": 4.549,
+   "text": "Everybody needs to go, sweetie. And good luck finding toilet paper in there."
+  },
+  "1b14f061f6": {
+   "seconds": 7.412,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "1b717f2d5c": {
+   "seconds": 0.828,
+   "text": "GET HER, BOB!"
+  },
+  "1eb436389c": {
+   "seconds": 3.266,
+   "text": "Nice try. There's nothing on my back. There never is."
+  },
+  "202d126899": {
+   "seconds": 2.854,
+   "text": "My tummy is making noises only whales understand."
+  },
+  "204805e73c": {
+   "seconds": 2.145,
+   "text": "I should have gone before I left the house."
+  },
+  "2451a37fe7": {
+   "seconds": 4.15,
+   "text": "Shh. Can't you hear that music? Some of us are trying to vibe."
+  },
+  "25a80e887f": {
+   "seconds": 0.871,
+   "text": "BATTLE! BATTLE!"
+  },
+  "2a01642606": {
+   "seconds": 1.081,
+   "text": "*bang bang*  Tissue!! Anybody!?"
+  },
+  "2ad0908bf7": {
+   "seconds": 5.308,
+   "text": "Thank you! There should be tissue lying around. Try near the sinks, the back corridor or this waiting room."
+  },
+  "2df9a6262d": {
+   "seconds": 2.384,
+   "text": "Ten more minutes and I'm using the sink."
+  },
+  "2dfd575436": {
+   "seconds": 1.826,
+   "text": "A VIP? In a toilet queue? Ha!"
+  },
+  "2ee7e8c03d": {
+   "seconds": 3.635,
+   "text": "Don't look at my hands. Wait, do look. They're very clean."
+  },
+  "31b9f9b059": {
+   "seconds": 1.012,
+   "text": "GIVE THEM THE TISSUE!"
+  },
+  "32d2a9782d": {
+   "seconds": 1.15,
+   "text": "*knock knock*  Get a mop! Please!"
+  },
+  "3434306fee": {
+   "seconds": 5.437,
+   "text": "Go bother someone else... Hey, do you hear music? Somebody's having a party back there by the stalls."
+  },
+  "34718f6762": {
+   "seconds": 2.362,
+   "text": "Hey! Somebody's in here with me!"
+  },
+  "35e45fd845": {
+   "seconds": 0.335,
+   "text": "OHHHHH!"
+  },
+  "3710627304": {
+   "seconds": 3.343,
+   "text": "OH NO. NO NO NO! I CLOGGED IT!! IT'S COMING OUT!!"
+  },
+  "3aa4c8e5fc": {
+   "seconds": 0.844,
+   "text": "SHUFFLE QUEEN!!"
+  },
+  "3c4c1bd818": {
+   "seconds": 3.016,
+   "text": "How rude! Out! Out! Go and ask nicely."
+  },
+  "3ef819ace7": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "4179d06a3a": {
+   "seconds": 3.114,
+   "text": "I've been at the front for an hour. The door never opens."
+  },
+  "418f297498": {
+   "seconds": 3.324,
+   "text": "I have no friends. I've been in this queue a very... long... time."
+  },
+  "43aecb2396": {
+   "seconds": 0.568,
+   "text": "EWWW!"
+  },
+  "478e2397e6": {
+   "seconds": 3.955,
+   "text": "I've been scrubbing for ages. Some smells just don't come off."
+  },
+  "487205ef53": {
+   "seconds": 1.665,
+   "text": "Please! I'm stuck in here!"
+  },
+  "4d1dd0a236": {
+   "seconds": 2.615,
+   "text": "This queue has a queue. I'm in the second queue."
+  },
+  "4f74a4b0de": {
+   "seconds": 2.545,
+   "text": "I'm not squirming. This is my dance."
+  },
+  "5523a69d94": {
+   "seconds": 5.15,
+   "text": "See those three pushing in? They think they own the place. Somebody should have a word with them."
+  },
+  "568b312016": {
+   "seconds": 2.403,
+   "text": "Mm-hm. Back of the line, sweetie."
+  },
+  "5863555f59": {
+   "seconds": 7.512,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "58c45d705e": {
+   "seconds": 1.404,
+   "text": "These taps are freezing."
+  },
+  "58db7a05aa": {
+   "seconds": 1.194,
+   "text": "ASK WHO NEEDS HELP!"
+  },
+  "58ecf3b87e": {
+   "seconds": 3.658,
+   "text": "Tell me a joke. No, wait. Don't. I can't laugh right now."
+  },
+  "59544d87df": {
+   "seconds": 2.906,
+   "text": "Do NOT make me laugh right now. It's dangerous."
+  },
+  "5bd4dc7efd": {
+   "seconds": 0.417,
+   "text": "RUN!"
+  },
+  "5c09e7c180": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "5e5663239a": {
+   "seconds": 2.422,
+   "text": "I'm doing my breathing. In... out... in... hold... HOLD..."
+  },
+  "60319a36ec": {
+   "seconds": 2.373,
+   "text": "...Fine. My lips are sealed. Not a sound."
+  },
+  "648e461b68": {
+   "seconds": 6.312,
+   "text": "Shh! It's hide and seek. When the counting stops, everybody comes looking. Find somewhere to hide."
+  },
+  "6c3c8a1ca3": {
+   "seconds": 0.436,
+   "text": "HIDE!"
+  },
+  "6c4e9bd359": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "6f370b46ae": {
+   "seconds": 2.295,
+   "text": "Nice try. I'm not turning around."
+  },
+  "7012fedfb5": {
+   "seconds": 0.435,
+   "text": "WHEEE!"
+  },
+  "74a03bd7a6": {
+   "seconds": 0.924,
+   "text": "STOP THE CUTTERS!"
+  },
+  "76cf48409a": {
+   "seconds": 0.622,
+   "text": "COVER ME!"
+  },
+  "77fe1f9e8e": {
+   "seconds": 0.74,
+   "text": "PULL THE PLUG!"
+  },
+  "7864f7f8f3": {
+   "seconds": 0.381,
+   "text": "UGH!"
+  },
+  "7b40b903e9": {
+   "seconds": 0.868,
+   "text": "WHO DID THAT?!"
+  },
+  "7c6fa4cfe5": {
+   "seconds": 3.455,
+   "text": "Then stop wasting my time. Come back when you change your mind."
+  },
+  "7d245896ac": {
+   "seconds": 0.976,
+   "text": "TALK YOUR WAY IN!"
+  },
+  "7de6fc1ca1": {
+   "seconds": 2.406,
+   "text": "Squeeze tight. That's my only advice."
+  },
+  "7ff722bc3f": {
+   "seconds": 0.98,
+   "text": "FIND SOME TISSUE!"
+  },
+  "8013687edb": {
+   "seconds": 2.477,
+   "text": "*bang bang*  The toilet's overflowing!! Somebody do something!"
+  },
+  "815458ee4f": {
+   "seconds": 3.58,
+   "text": "I'm not waiting for a stall. I'm just... walking. Around. Yes."
+  },
+  "83b46594a8": {
+   "seconds": 0.95,
+   "text": "DO IT, BOB!"
+  },
+  "8491e412ff": {
+   "seconds": 2.394,
+   "text": "It won't stop! There's water everywhere!"
+  },
+  "8504207e5a": {
+   "seconds": 2.696,
+   "text": "I counted the tiles. Four thousand and twelve."
+  },
+  "8f933776c9": {
+   "seconds": 7.912,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "8fd773f434": {
+   "seconds": 2.955,
+   "text": "Whoever had the beans for lunch, I know it was you."
+  },
+  "90f04d73d6": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "932f882bfa": {
+   "seconds": 2.265,
+   "text": "I'm NEXT. Don't even think about it."
+  },
+  "a2e41d0279": {
+   "seconds": 0.682,
+   "text": "EAT BROWN!"
+  },
+  "a43d4645e3": {
+   "seconds": 0.952,
+   "text": "WIN THE DANCE BATTLE!"
+  },
+  "a542aeebb1": {
+   "seconds": 3.799,
+   "text": "No cutting! Some real line-cutters come through here, you know."
+  },
+  "a96368e0a9": {
+   "seconds": 2.687,
+   "text": "Don't look at me. I'm concentrating very hard."
+  },
+  "ad1bee6a28": {
+   "seconds": 2.807,
+   "text": "I dreamt about a toilet last night. It was free."
+  },
+  "af32c43778": {
+   "seconds": 2.378,
+   "text": "Oh, hello. Nice corridor, isn't it?"
+  },
+  "b1a6f463bd": {
+   "seconds": 0.866,
+   "text": "PLUNGE THE TOILET!"
+  },
+  "b49b517903": {
+   "seconds": 2.502,
+   "text": "Psst! You look as desperate as I feel..."
+  },
+  "b690cb720a": {
+   "seconds": 3.202,
+   "text": "What do you want? I'm not letting anybody in front of me."
+  },
+  "b811a950f3": {
+   "seconds": 7.112,
+   "text": "The toilet's clogged and they've turned every tap on! Plunge it, shut the taps, then pull the plug in the waiting room floor."
+  },
+  "b8bf400db1": {
+   "seconds": 0.921,
+   "text": "MOP UP THE WATER!"
+  },
+  "b95f8fe529": {
+   "seconds": 2.124,
+   "text": "I brought a book. I've finished the book."
+  },
+  "bef8e6600a": {
+   "seconds": 0.858,
+   "text": "SHOW US!"
+  },
+  "c052dc70a7": {
+   "seconds": 2.068,
+   "text": "Don't even THINK about cutting in."
+  },
+  "c224e46f42": {
+   "seconds": 2.868,
+   "text": "Sorry, I can't stand still. Too much coffee."
+  },
+  "c514473771": {
+   "seconds": 2.94,
+   "text": "Just stretching my legs. The queue isn't moving."
+  },
+  "cdbb94f46f": {
+   "seconds": 2.583,
+   "text": "Bursting? Everybody in here is bursting."
+  },
+  "cf962d5807": {
+   "seconds": 4.919,
+   "text": "I lost my friend in here. Have you seen a Jijio? Never mind, everyone is a Jijio."
+  },
+  "d08b54a255": {
+   "seconds": 1.86,
+   "text": "If I sneeze, we're all in trouble."
+  },
+  "d31cf83781": {
+   "seconds": 7.512,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "d4a125b221": {
+   "seconds": 0.779,
+   "text": "FIND THE MOP!"
+  },
+  "d64b93f490": {
+   "seconds": 7.812,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "d715711bcd": {
+   "seconds": 7.512,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "d8bff8dfc5": {
+   "seconds": 3.612,
+   "text": "Hey! This is MY stall. What do you think you're doing in here?"
+  },
+  "d923108ccc": {
+   "seconds": 3.957,
+   "text": "I'm fine. Totally fine. Why are my legs shaking? No reason."
+  },
+  "d96cdae192": {
+   "seconds": 3.387,
+   "text": "I can hear the flush. It's so close. So beautiful."
+  },
+  "d9bdf9d849": {
+   "seconds": 7.912,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "dbe144eaac": {
+   "seconds": 7.612,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "dd827337a7": {
+   "seconds": 1.718,
+   "text": "*knock knock*  Hello?? Anyone got tissue?!"
+  },
+  "de899948d4": {
+   "seconds": 7.512,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "debbfea930": {
+   "seconds": 7.512,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "e03e5577bf": {
+   "seconds": 2.489,
+   "text": "Happy birthday. The line's still that way."
+  },
+  "e1324229f5": {
+   "seconds": 1.079,
+   "text": "What do you say?"
+  },
+  "e3b97cc56b": {
+   "seconds": 2.416,
+   "text": "Fourteen laps so far. Don't ask."
+  },
+  "e3e4468675": {
+   "seconds": 0.809,
+   "text": "THERE HE IS!"
+  },
+  "e674a4448b": {
+   "seconds": 1.072,
+   "text": "TURN IT ALL ON!"
+  },
+  "e82a691220": {
+   "seconds": 2.492,
+   "text": "At this rate I'll retire before I get in."
+  },
+  "e84d3ce26e": {
+   "seconds": 1.964,
+   "text": "Oh thank goodness!! You are a lifesaver!"
+  },
+  "ea5c60b036": {
+   "seconds": 3.457,
+   "text": "Nobody lets anyone cut in here. Unless you've got MOVES..."
+  },
+  "ec56583890": {
+   "seconds": 7.212,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "ecc8ee0896": {
+   "seconds": 3.192,
+   "text": "Every time that door creaks, my heart does a little dance."
+  },
+  "ed9670c3ff": {
+   "seconds": 3.082,
+   "text": "Hm? Oh, it's YOU again. Back of the line, pal."
+  },
+  "ee9c883ed7": {
+   "seconds": 1.057,
+   "text": "TURN OFF THE SINKS!"
+  },
+  "f2c4bfeb86": {
+   "seconds": 2.357,
+   "text": "Is it me, or is this line going backwards?"
+  },
+  "f6f1f0e7f1": {
+   "seconds": 7.212,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "f847bb9fc7": {
+   "seconds": 3.091,
+   "text": "The Jijio in front of me hasn't moved since Tuesday."
+  },
+  "fac28148b1": {
+   "seconds": 5.654,
+   "text": "Desperate too? The Jijio right in front of you in the queue knows who needs help. Have a word with them."
+  },
+  "fe09a774d1": {
+   "seconds": 0.762,
+   "text": "DANCE OFF!"
+  }
+ },
+ "jijio_b": {
+  "006b7457fc": {
+   "seconds": 2.953,
+   "text": "Stop breathing on my neck. Oh, it's you. Still stop."
+  },
+  "03317b5877": {
+   "seconds": 1.027,
+   "text": "Are you going to help them?"
+  },
+  "03581d3086": {
+   "seconds": 2.921,
+   "text": "Back of the line, pal. Oh, you're already behind me. Good."
+  },
+  "0628d294dd": {
+   "seconds": 2.261,
+   "text": "My knees are crossed so tight they've merged."
+  },
+  "06bac6e523": {
+   "seconds": 3.594,
+   "text": "I've made friends with everyone in this queue. Except him. He knows what he did."
+  },
+  "0a57cc4fa6": {
+   "seconds": 0.66,
+   "text": "MY SHIRT!"
+  },
+  "0b7ccd9b23": {
+   "seconds": 2.144,
+   "text": "Everyone in this queue is an emergency, pal."
+  },
+  "0bd29a9406": {
+   "seconds": 0.554,
+   "text": "WOOO!"
+  },
+  "0c391e8723": {
+   "seconds": 6.412,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "0db8d9b011": {
+   "seconds": 6.912,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "0e84293b6c": {
+   "seconds": 6.512,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "0ee88a09e0": {
+   "seconds": 2.964,
+   "text": "You want MY place? Do you know how long I've been waiting for this toilet?"
+  },
+  "155d9fe4d1": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "15db0f8fc1": {
+   "seconds": 0.983,
+   "text": "FIND ANOTHER WAY IN!"
+  },
+  "17db6268fb": {
+   "seconds": 3.689,
+   "text": "Everybody needs to go, sweetie. And good luck finding toilet paper in there."
+  },
+  "1b14f061f6": {
+   "seconds": 6.412,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "1b717f2d5c": {
+   "seconds": 0.72,
+   "text": "GET HER, BOB!"
+  },
+  "1eb436389c": {
+   "seconds": 2.633,
+   "text": "Nice try. There's nothing on my back. There never is."
+  },
+  "202d126899": {
+   "seconds": 2.288,
+   "text": "My tummy is making noises only whales understand."
+  },
+  "204805e73c": {
+   "seconds": 1.684,
+   "text": "I should have gone before I left the house."
+  },
+  "2451a37fe7": {
+   "seconds": 3.751,
+   "text": "Shh. Can't you hear that music? Some of us are trying to vibe."
+  },
+  "25a80e887f": {
+   "seconds": 1.115,
+   "text": "BATTLE! BATTLE!"
+  },
+  "2a01642606": {
+   "seconds": 1.061,
+   "text": "*bang bang*  Tissue!! Anybody!?"
+  },
+  "2ad0908bf7": {
+   "seconds": 5.247,
+   "text": "Thank you! There should be tissue lying around. Try near the sinks, the back corridor or this waiting room."
+  },
+  "2df9a6262d": {
+   "seconds": 1.806,
+   "text": "Ten more minutes and I'm using the sink."
+  },
+  "2dfd575436": {
+   "seconds": 1.81,
+   "text": "A VIP? In a toilet queue? Ha!"
+  },
+  "2ee7e8c03d": {
+   "seconds": 2.784,
+   "text": "Don't look at my hands. Wait, do look. They're very clean."
+  },
+  "31b9f9b059": {
+   "seconds": 0.943,
+   "text": "GIVE THEM THE TISSUE!"
+  },
+  "32d2a9782d": {
+   "seconds": 1.175,
+   "text": "*knock knock*  Get a mop! Please!"
+  },
+  "3434306fee": {
+   "seconds": 4.233,
+   "text": "Go bother someone else... Hey, do you hear music? Somebody's having a party back there by the stalls."
+  },
+  "34718f6762": {
+   "seconds": 2.028,
+   "text": "Hey! Somebody's in here with me!"
+  },
+  "35e45fd845": {
+   "seconds": 0.364,
+   "text": "OHHHHH!"
+  },
+  "3710627304": {
+   "seconds": 2.963,
+   "text": "OH NO. NO NO NO! I CLOGGED IT!! IT'S COMING OUT!!"
+  },
+  "3aa4c8e5fc": {
+   "seconds": 0.795,
+   "text": "SHUFFLE QUEEN!!"
+  },
+  "3c4c1bd818": {
+   "seconds": 2.579,
+   "text": "How rude! Out! Out! Go and ask nicely."
+  },
+  "3ef819ace7": {
+   "seconds": 6.212,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "4179d06a3a": {
+   "seconds": 2.394,
+   "text": "I've been at the front for an hour. The door never opens."
+  },
+  "418f297498": {
+   "seconds": 2.644,
+   "text": "I have no friends. I've been in this queue a very... long... time."
+  },
+  "43aecb2396": {
+   "seconds": 0.67,
+   "text": "EWWW!"
+  },
+  "478e2397e6": {
+   "seconds": 3.092,
+   "text": "I've been scrubbing for ages. Some smells just don't come off."
+  },
+  "487205ef53": {
+   "seconds": 1.466,
+   "text": "Please! I'm stuck in here!"
+  },
+  "4d1dd0a236": {
+   "seconds": 2.153,
+   "text": "This queue has a queue. I'm in the second queue."
+  },
+  "4f74a4b0de": {
+   "seconds": 2.019,
+   "text": "I'm not squirming. This is my dance."
+  },
+  "5523a69d94": {
+   "seconds": 4.016,
+   "text": "See those three pushing in? They think they own the place. Somebody should have a word with them."
+  },
+  "568b312016": {
+   "seconds": 2.229,
+   "text": "Mm-hm. Back of the line, sweetie."
+  },
+  "5863555f59": {
+   "seconds": 6.312,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "58c45d705e": {
+   "seconds": 1.395,
+   "text": "These taps are freezing."
+  },
+  "58db7a05aa": {
+   "seconds": 1.073,
+   "text": "ASK WHO NEEDS HELP!"
+  },
+  "58ecf3b87e": {
+   "seconds": 3.13,
+   "text": "Tell me a joke. No, wait. Don't. I can't laugh right now."
+  },
+  "59544d87df": {
+   "seconds": 2.495,
+   "text": "Do NOT make me laugh right now. It's dangerous."
+  },
+  "5bd4dc7efd": {
+   "seconds": 0.413,
+   "text": "RUN!"
+  },
+  "5c09e7c180": {
+   "seconds": 6.412,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "5e5663239a": {
+   "seconds": 2.381,
+   "text": "I'm doing my breathing. In... out... in... hold... HOLD..."
+  },
+  "60319a36ec": {
+   "seconds": 2.436,
+   "text": "...Fine. My lips are sealed. Not a sound."
+  },
+  "648e461b68": {
+   "seconds": 5.291,
+   "text": "Shh! It's hide and seek. When the counting stops, everybody comes looking. Find somewhere to hide."
+  },
+  "6c3c8a1ca3": {
+   "seconds": 0.457,
+   "text": "HIDE!"
+  },
+  "6c4e9bd359": {
+   "seconds": 6.012,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "6f370b46ae": {
+   "seconds": 1.919,
+   "text": "Nice try. I'm not turning around."
+  },
+  "7012fedfb5": {
+   "seconds": 0.421,
+   "text": "WHEEE!"
+  },
+  "74a03bd7a6": {
+   "seconds": 0.803,
+   "text": "STOP THE CUTTERS!"
+  },
+  "76cf48409a": {
+   "seconds": 0.594,
+   "text": "COVER ME!"
+  },
+  "77fe1f9e8e": {
+   "seconds": 0.664,
+   "text": "PULL THE PLUG!"
+  },
+  "7864f7f8f3": {
+   "seconds": 0.456,
+   "text": "UGH!"
+  },
+  "7b40b903e9": {
+   "seconds": 0.747,
+   "text": "WHO DID THAT?!"
+  },
+  "7c6fa4cfe5": {
+   "seconds": 2.848,
+   "text": "Then stop wasting my time. Come back when you change your mind."
+  },
+  "7d245896ac": {
+   "seconds": 1.12,
+   "text": "TALK YOUR WAY IN!"
+  },
+  "7de6fc1ca1": {
+   "seconds": 2.236,
+   "text": "Squeeze tight. That's my only advice."
+  },
+  "7ff722bc3f": {
+   "seconds": 0.992,
+   "text": "FIND SOME TISSUE!"
+  },
+  "8013687edb": {
+   "seconds": 2.026,
+   "text": "*bang bang*  The toilet's overflowing!! Somebody do something!"
+  },
+  "815458ee4f": {
+   "seconds": 3.428,
+   "text": "I'm not waiting for a stall. I'm just... walking. Around. Yes."
+  },
+  "83b46594a8": {
+   "seconds": 0.773,
+   "text": "DO IT, BOB!"
+  },
+  "8491e412ff": {
+   "seconds": 2.103,
+   "text": "It won't stop! There's water everywhere!"
+  },
+  "8504207e5a": {
+   "seconds": 2.275,
+   "text": "I counted the tiles. Four thousand and twelve."
+  },
+  "8f933776c9": {
+   "seconds": 7.312,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "8fd773f434": {
+   "seconds": 2.4,
+   "text": "Whoever had the beans for lunch, I know it was you."
+  },
+  "90f04d73d6": {
+   "seconds": 6.312,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "932f882bfa": {
+   "seconds": 1.805,
+   "text": "I'm NEXT. Don't even think about it."
+  },
+  "a2e41d0279": {
+   "seconds": 0.645,
+   "text": "EAT BROWN!"
+  },
+  "a43d4645e3": {
+   "seconds": 0.94,
+   "text": "WIN THE DANCE BATTLE!"
+  },
+  "a542aeebb1": {
+   "seconds": 3.417,
+   "text": "No cutting! Some real line-cutters come through here, you know."
+  },
+  "a96368e0a9": {
+   "seconds": 2.453,
+   "text": "Don't look at me. I'm concentrating very hard."
+  },
+  "ad1bee6a28": {
+   "seconds": 2.419,
+   "text": "I dreamt about a toilet last night. It was free."
+  },
+  "af32c43778": {
+   "seconds": 2.344,
+   "text": "Oh, hello. Nice corridor, isn't it?"
+  },
+  "b1a6f463bd": {
+   "seconds": 0.868,
+   "text": "PLUNGE THE TOILET!"
+  },
+  "b49b517903": {
+   "seconds": 2.039,
+   "text": "Psst! You look as desperate as I feel..."
+  },
+  "b690cb720a": {
+   "seconds": 2.603,
+   "text": "What do you want? I'm not letting anybody in front of me."
+  },
+  "b811a950f3": {
+   "seconds": 5.912,
+   "text": "The toilet's clogged and they've turned every tap on! Plunge it, shut the taps, then pull the plug in the waiting room floor."
+  },
+  "b8bf400db1": {
+   "seconds": 0.92,
+   "text": "MOP UP THE WATER!"
+  },
+  "b95f8fe529": {
+   "seconds": 1.719,
+   "text": "I brought a book. I've finished the book."
+  },
+  "bef8e6600a": {
+   "seconds": 0.764,
+   "text": "SHOW US!"
+  },
+  "c052dc70a7": {
+   "seconds": 1.43,
+   "text": "Don't even THINK about cutting in."
+  },
+  "c224e46f42": {
+   "seconds": 2.675,
+   "text": "Sorry, I can't stand still. Too much coffee."
+  },
+  "c514473771": {
+   "seconds": 2.29,
+   "text": "Just stretching my legs. The queue isn't moving."
+  },
+  "cdbb94f46f": {
+   "seconds": 2.111,
+   "text": "Bursting? Everybody in here is bursting."
+  },
+  "cf962d5807": {
+   "seconds": 4.493,
+   "text": "I lost my friend in here. Have you seen a Jijio? Never mind, everyone is a Jijio."
+  },
+  "d08b54a255": {
+   "seconds": 1.758,
+   "text": "If I sneeze, we're all in trouble."
+  },
+  "d31cf83781": {
+   "seconds": 6.612,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "d4a125b221": {
+   "seconds": 0.666,
+   "text": "FIND THE MOP!"
+  },
+  "d64b93f490": {
+   "seconds": 7.012,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "d715711bcd": {
+   "seconds": 6.112,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "d8bff8dfc5": {
+   "seconds": 2.933,
+   "text": "Hey! This is MY stall. What do you think you're doing in here?"
+  },
+  "d923108ccc": {
+   "seconds": 3.644,
+   "text": "I'm fine. Totally fine. Why are my legs shaking? No reason."
+  },
+  "d96cdae192": {
+   "seconds": 2.936,
+   "text": "I can hear the flush. It's so close. So beautiful."
+  },
+  "d9bdf9d849": {
+   "seconds": 7.012,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "dbe144eaac": {
+   "seconds": 6.912,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "dd827337a7": {
+   "seconds": 1.518,
+   "text": "*knock knock*  Hello?? Anyone got tissue?!"
+  },
+  "de899948d4": {
+   "seconds": 6.512,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "debbfea930": {
+   "seconds": 6.712,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "e03e5577bf": {
+   "seconds": 2.36,
+   "text": "Happy birthday. The line's still that way."
+  },
+  "e1324229f5": {
+   "seconds": 0.897,
+   "text": "What do you say?"
+  },
+  "e3b97cc56b": {
+   "seconds": 2.172,
+   "text": "Fourteen laps so far. Don't ask."
+  },
+  "e3e4468675": {
+   "seconds": 0.72,
+   "text": "THERE HE IS!"
+  },
+  "e674a4448b": {
+   "seconds": 1.049,
+   "text": "TURN IT ALL ON!"
+  },
+  "e82a691220": {
+   "seconds": 1.889,
+   "text": "At this rate I'll retire before I get in."
+  },
+  "e84d3ce26e": {
+   "seconds": 2.329,
+   "text": "Oh thank goodness!! You are a lifesaver!"
+  },
+  "ea5c60b036": {
+   "seconds": 2.778,
+   "text": "Nobody lets anyone cut in here. Unless you've got MOVES..."
+  },
+  "ec56583890": {
+   "seconds": 6.612,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "ecc8ee0896": {
+   "seconds": 2.599,
+   "text": "Every time that door creaks, my heart does a little dance."
+  },
+  "ed9670c3ff": {
+   "seconds": 2.702,
+   "text": "Hm? Oh, it's YOU again. Back of the line, pal."
+  },
+  "ee9c883ed7": {
+   "seconds": 1.117,
+   "text": "TURN OFF THE SINKS!"
+  },
+  "f2c4bfeb86": {
+   "seconds": 2.107,
+   "text": "Is it me, or is this line going backwards?"
+  },
+  "f6f1f0e7f1": {
+   "seconds": 6.212,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "f847bb9fc7": {
+   "seconds": 2.453,
+   "text": "The Jijio in front of me hasn't moved since Tuesday."
+  },
+  "fac28148b1": {
+   "seconds": 4.493,
+   "text": "Desperate too? The Jijio right in front of you in the queue knows who needs help. Have a word with them."
+  },
+  "fe09a774d1": {
+   "seconds": 0.756,
+   "text": "DANCE OFF!"
+  }
+ },
+ "jijio_c": {
+  "006b7457fc": {
+   "seconds": 3.201,
+   "text": "Stop breathing on my neck. Oh, it's you. Still stop."
+  },
+  "03317b5877": {
+   "seconds": 0.954,
+   "text": "Are you going to help them?"
+  },
+  "03581d3086": {
+   "seconds": 5.211,
+   "text": "Back of the line, pal. Oh, you're already behind me. Good."
+  },
+  "0628d294dd": {
+   "seconds": 1.575,
+   "text": "My knees are crossed so tight they've merged."
+  },
+  "06bac6e523": {
+   "seconds": 3.335,
+   "text": "I've made friends with everyone in this queue. Except him. He knows what he did."
+  },
+  "0a57cc4fa6": {
+   "seconds": 1.405,
+   "text": "MY SHIRT!"
+  },
+  "0b7ccd9b23": {
+   "seconds": 2.573,
+   "text": "Everyone in this queue is an emergency, pal."
+  },
+  "0bd29a9406": {
+   "seconds": 0.684,
+   "text": "WOOO!"
+  },
+  "0c391e8723": {
+   "seconds": 5.685,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "0db8d9b011": {
+   "seconds": 6.212,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "0e84293b6c": {
+   "seconds": 6.012,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "0ee88a09e0": {
+   "seconds": 3.225,
+   "text": "You want MY place? Do you know how long I've been waiting for this toilet?"
+  },
+  "155d9fe4d1": {
+   "seconds": 6.512,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "15db0f8fc1": {
+   "seconds": 0.964,
+   "text": "FIND ANOTHER WAY IN!"
+  },
+  "17db6268fb": {
+   "seconds": 3.603,
+   "text": "Everybody needs to go, sweetie. And good luck finding toilet paper in there."
+  },
+  "1b14f061f6": {
+   "seconds": 6.012,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 7 from the entrance, has run out of tissue!"
+  },
+  "1b717f2d5c": {
+   "seconds": 2.792,
+   "text": "GET HER, BOB!"
+  },
+  "1eb436389c": {
+   "seconds": 2.78,
+   "text": "Nice try. There's nothing on my back. There never is."
+  },
+  "202d126899": {
+   "seconds": 2.107,
+   "text": "My tummy is making noises only whales understand."
+  },
+  "204805e73c": {
+   "seconds": 1.704,
+   "text": "I should have gone before I left the house."
+  },
+  "2451a37fe7": {
+   "seconds": 3.603,
+   "text": "Shh. Can't you hear that music? Some of us are trying to vibe."
+  },
+  "25a80e887f": {
+   "seconds": 1.763,
+   "text": "BATTLE! BATTLE!"
+  },
+  "2a01642606": {
+   "seconds": 1.858,
+   "text": "*bang bang*  Tissue!! Anybody!?"
+  },
+  "2ad0908bf7": {
+   "seconds": 4.443,
+   "text": "Thank you! There should be tissue lying around. Try near the sinks, the back corridor or this waiting room."
+  },
+  "2df9a6262d": {
+   "seconds": 2.017,
+   "text": "Ten more minutes and I'm using the sink."
+  },
+  "2dfd575436": {
+   "seconds": 4.872,
+   "text": "A VIP? In a toilet queue? Ha!"
+  },
+  "2ee7e8c03d": {
+   "seconds": 3.276,
+   "text": "Don't look at my hands. Wait, do look. They're very clean."
+  },
+  "31b9f9b059": {
+   "seconds": 0.757,
+   "text": "GIVE THEM THE TISSUE!"
+  },
+  "32d2a9782d": {
+   "seconds": 3.426,
+   "text": "*knock knock*  Get a mop! Please!"
+  },
+  "3434306fee": {
+   "seconds": 4.444,
+   "text": "Go bother someone else... Hey, do you hear music? Somebody's having a party back there by the stalls."
+  },
+  "34718f6762": {
+   "seconds": 4.061,
+   "text": "Hey! Somebody's in here with me!"
+  },
+  "35e45fd845": {
+   "seconds": 0.574,
+   "text": "OHHHHH!"
+  },
+  "3710627304": {
+   "seconds": 5.176,
+   "text": "OH NO. NO NO NO! I CLOGGED IT!! IT'S COMING OUT!!"
+  },
+  "3aa4c8e5fc": {
+   "seconds": 0.776,
+   "text": "SHUFFLE QUEEN!!"
+  },
+  "3c4c1bd818": {
+   "seconds": 6.312,
+   "text": "How rude! Out! Out! Go and ask nicely."
+  },
+  "3ef819ace7": {
+   "seconds": 5.912,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "4179d06a3a": {
+   "seconds": 2.133,
+   "text": "I've been at the front for an hour. The door never opens."
+  },
+  "418f297498": {
+   "seconds": 2.485,
+   "text": "I have no friends. I've been in this queue a very... long... time."
+  },
+  "43aecb2396": {
+   "seconds": 1.582,
+   "text": "EWWW!"
+  },
+  "478e2397e6": {
+   "seconds": 2.647,
+   "text": "I've been scrubbing for ages. Some smells just don't come off."
+  },
+  "487205ef53": {
+   "seconds": 1.644,
+   "text": "Please! I'm stuck in here!"
+  },
+  "4d1dd0a236": {
+   "seconds": 1.935,
+   "text": "This queue has a queue. I'm in the second queue."
+  },
+  "4f74a4b0de": {
+   "seconds": 3.238,
+   "text": "I'm not squirming. This is my dance."
+  },
+  "5523a69d94": {
+   "seconds": 4.006,
+   "text": "See those three pushing in? They think they own the place. Somebody should have a word with them."
+  },
+  "568b312016": {
+   "seconds": 2.363,
+   "text": "Mm-hm. Back of the line, sweetie."
+  },
+  "5863555f59": {
+   "seconds": 6.412,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "58c45d705e": {
+   "seconds": 1.178,
+   "text": "These taps are freezing."
+  },
+  "58db7a05aa": {
+   "seconds": 0.894,
+   "text": "ASK WHO NEEDS HELP!"
+  },
+  "58ecf3b87e": {
+   "seconds": 4.147,
+   "text": "Tell me a joke. No, wait. Don't. I can't laugh right now."
+  },
+  "59544d87df": {
+   "seconds": 2.208,
+   "text": "Do NOT make me laugh right now. It's dangerous."
+  },
+  "5bd4dc7efd": {
+   "seconds": 1.595,
+   "text": "RUN!"
+  },
+  "5c09e7c180": {
+   "seconds": 5.912,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "5e5663239a": {
+   "seconds": 2.143,
+   "text": "I'm doing my breathing. In... out... in... hold... HOLD..."
+  },
+  "60319a36ec": {
+   "seconds": 5.386,
+   "text": "...Fine. My lips are sealed. Not a sound."
+  },
+  "648e461b68": {
+   "seconds": 4.988,
+   "text": "Shh! It's hide and seek. When the counting stops, everybody comes looking. Find somewhere to hide."
+  },
+  "6c3c8a1ca3": {
+   "seconds": 0.701,
+   "text": "HIDE!"
+  },
+  "6c4e9bd359": {
+   "seconds": 5.528,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "6f370b46ae": {
+   "seconds": 2.253,
+   "text": "Nice try. I'm not turning around."
+  },
+  "7012fedfb5": {
+   "seconds": 1.511,
+   "text": "WHEEE!"
+  },
+  "74a03bd7a6": {
+   "seconds": 0.748,
+   "text": "STOP THE CUTTERS!"
+  },
+  "76cf48409a": {
+   "seconds": 1.515,
+   "text": "COVER ME!"
+  },
+  "77fe1f9e8e": {
+   "seconds": 0.608,
+   "text": "PULL THE PLUG!"
+  },
+  "7864f7f8f3": {
+   "seconds": 1.86,
+   "text": "UGH!"
+  },
+  "7b40b903e9": {
+   "seconds": 0.563,
+   "text": "WHO DID THAT?!"
+  },
+  "7c6fa4cfe5": {
+   "seconds": 2.754,
+   "text": "Then stop wasting my time. Come back when you change your mind."
+  },
+  "7d245896ac": {
+   "seconds": 1.45,
+   "text": "TALK YOUR WAY IN!"
+  },
+  "7de6fc1ca1": {
+   "seconds": 2.008,
+   "text": "Squeeze tight. That's my only advice."
+  },
+  "7ff722bc3f": {
+   "seconds": 1.001,
+   "text": "FIND SOME TISSUE!"
+  },
+  "8013687edb": {
+   "seconds": 2.203,
+   "text": "*bang bang*  The toilet's overflowing!! Somebody do something!"
+  },
+  "815458ee4f": {
+   "seconds": 4.582,
+   "text": "I'm not waiting for a stall. I'm just... walking. Around. Yes."
+  },
+  "83b46594a8": {
+   "seconds": 1.614,
+   "text": "DO IT, BOB!"
+  },
+  "8491e412ff": {
+   "seconds": 1.895,
+   "text": "It won't stop! There's water everywhere!"
+  },
+  "8504207e5a": {
+   "seconds": 2.063,
+   "text": "I counted the tiles. Four thousand and twelve."
+  },
+  "8f933776c9": {
+   "seconds": 6.612,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "8fd773f434": {
+   "seconds": 2.176,
+   "text": "Whoever had the beans for lunch, I know it was you."
+  },
+  "90f04d73d6": {
+   "seconds": 5.634,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "932f882bfa": {
+   "seconds": 2.169,
+   "text": "I'm NEXT. Don't even think about it."
+  },
+  "a2e41d0279": {
+   "seconds": 1.862,
+   "text": "EAT BROWN!"
+  },
+  "a43d4645e3": {
+   "seconds": 0.805,
+   "text": "WIN THE DANCE BATTLE!"
+  },
+  "a542aeebb1": {
+   "seconds": 3.093,
+   "text": "No cutting! Some real line-cutters come through here, you know."
+  },
+  "a96368e0a9": {
+   "seconds": 2.358,
+   "text": "Don't look at me. I'm concentrating very hard."
+  },
+  "ad1bee6a28": {
+   "seconds": 2.295,
+   "text": "I dreamt about a toilet last night. It was free."
+  },
+  "af32c43778": {
+   "seconds": 2.37,
+   "text": "Oh, hello. Nice corridor, isn't it?"
+  },
+  "b1a6f463bd": {
+   "seconds": 0.784,
+   "text": "PLUNGE THE TOILET!"
+  },
+  "b49b517903": {
+   "seconds": 3.482,
+   "text": "Psst! You look as desperate as I feel..."
+  },
+  "b690cb720a": {
+   "seconds": 2.588,
+   "text": "What do you want? I'm not letting anybody in front of me."
+  },
+  "b811a950f3": {
+   "seconds": 5.912,
+   "text": "The toilet's clogged and they've turned every tap on! Plunge it, shut the taps, then pull the plug in the waiting room floor."
+  },
+  "b8bf400db1": {
+   "seconds": 0.826,
+   "text": "MOP UP THE WATER!"
+  },
+  "b95f8fe529": {
+   "seconds": 1.684,
+   "text": "I brought a book. I've finished the book."
+  },
+  "bef8e6600a": {
+   "seconds": 0.81,
+   "text": "SHOW US!"
+  },
+  "c052dc70a7": {
+   "seconds": 1.401,
+   "text": "Don't even THINK about cutting in."
+  },
+  "c224e46f42": {
+   "seconds": 2.958,
+   "text": "Sorry, I can't stand still. Too much coffee."
+  },
+  "c514473771": {
+   "seconds": 2.142,
+   "text": "Just stretching my legs. The queue isn't moving."
+  },
+  "cdbb94f46f": {
+   "seconds": 3.469,
+   "text": "Bursting? Everybody in here is bursting."
+  },
+  "cf962d5807": {
+   "seconds": 4.198,
+   "text": "I lost my friend in here. Have you seen a Jijio? Never mind, everyone is a Jijio."
+  },
+  "d08b54a255": {
+   "seconds": 1.525,
+   "text": "If I sneeze, we're all in trouble."
+  },
+  "d31cf83781": {
+   "seconds": 6.112,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 2 from the entrance, has run out of tissue!"
+  },
+  "d4a125b221": {
+   "seconds": 0.734,
+   "text": "FIND THE MOP!"
+  },
+  "d64b93f490": {
+   "seconds": 6.112,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 5 from the entrance, has run out of tissue!"
+  },
+  "d715711bcd": {
+   "seconds": 5.513,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 6 from the entrance, has run out of tissue!"
+  },
+  "d8bff8dfc5": {
+   "seconds": 4.149,
+   "text": "Hey! This is MY stall. What do you think you're doing in here?"
+  },
+  "d923108ccc": {
+   "seconds": 5.808,
+   "text": "I'm fine. Totally fine. Why are my legs shaking? No reason."
+  },
+  "d96cdae192": {
+   "seconds": 2.463,
+   "text": "I can hear the flush. It's so close. So beautiful."
+  },
+  "d9bdf9d849": {
+   "seconds": 6.112,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 10 from the entrance, has run out of tissue!"
+  },
+  "dbe144eaac": {
+   "seconds": 6.312,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 1 from the entrance, has run out of tissue!"
+  },
+  "dd827337a7": {
+   "seconds": 1.433,
+   "text": "*knock knock*  Hello?? Anyone got tissue?!"
+  },
+  "de899948d4": {
+   "seconds": 6.512,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 8 from the entrance, has run out of tissue!"
+  },
+  "debbfea930": {
+   "seconds": 5.912,
+   "text": "Ugh, that knocking again... The person in the first row (along the corridor you walk in from), stall number 9 from the entrance, has run out of tissue!"
+  },
+  "e03e5577bf": {
+   "seconds": 1.822,
+   "text": "Happy birthday. The line's still that way."
+  },
+  "e1324229f5": {
+   "seconds": 0.863,
+   "text": "What do you say?"
+  },
+  "e3b97cc56b": {
+   "seconds": 3.228,
+   "text": "Fourteen laps so far. Don't ask."
+  },
+  "e3e4468675": {
+   "seconds": 0.776,
+   "text": "THERE HE IS!"
+  },
+  "e674a4448b": {
+   "seconds": 1.152,
+   "text": "TURN IT ALL ON!"
+  },
+  "e82a691220": {
+   "seconds": 1.81,
+   "text": "At this rate I'll retire before I get in."
+  },
+  "e84d3ce26e": {
+   "seconds": 1.544,
+   "text": "Oh thank goodness!! You are a lifesaver!"
+  },
+  "ea5c60b036": {
+   "seconds": 2.619,
+   "text": "Nobody lets anyone cut in here. Unless you've got MOVES..."
+  },
+  "ec56583890": {
+   "seconds": 5.912,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 3 from the entrance, has run out of tissue!"
+  },
+  "ecc8ee0896": {
+   "seconds": 2.348,
+   "text": "Every time that door creaks, my heart does a little dance."
+  },
+  "ed9670c3ff": {
+   "seconds": 3.517,
+   "text": "Hm? Oh, it's YOU again. Back of the line, pal."
+  },
+  "ee9c883ed7": {
+   "seconds": 0.92,
+   "text": "TURN OFF THE SINKS!"
+  },
+  "f2c4bfeb86": {
+   "seconds": 2.071,
+   "text": "Is it me, or is this line going backwards?"
+  },
+  "f6f1f0e7f1": {
+   "seconds": 5.457,
+   "text": "Ugh, that knocking again... The person in the back row (the corridor behind the stalls), stall number 4 from the entrance, has run out of tissue!"
+  },
+  "f847bb9fc7": {
+   "seconds": 2.383,
+   "text": "The Jijio in front of me hasn't moved since Tuesday."
+  },
+  "fac28148b1": {
+   "seconds": 4.222,
+   "text": "Desperate too? The Jijio right in front of you in the queue knows who needs help. Have a word with them."
+  },
+  "fe09a774d1": {
+   "seconds": 2.013,
+   "text": "DANCE OFF!"
+  }
+ },
+ "pushy": {
+  "0d67d44fe5": {
+   "seconds": 2.45,
+   "text": "Outta my way, shorty! I'm going first."
+  },
+  "2d2d34a6aa": {
+   "seconds": 2.36,
+   "text": "Oh yeah? Make me!"
+  },
+  "54ff65701a": {
+   "seconds": 3.508,
+   "text": "You beat my crew? Cute. CREW! BROWN WATER, NOW!"
+  },
+  "76882eef0d": {
+   "seconds": 1.375,
+   "text": "Then I'll just have to shut you up!"
+  },
+  "a2b22632c5": {
+   "seconds": 3.633,
+   "text": "Shhh... nobody saw me slip in, right?"
+  },
+  "a3dd3b89a1": {
+   "seconds": 3.104,
+   "text": "I own this toilet. Everybody out!"
+  }
+ },
+ "queen": {
+  "14c8d23576": {
+   "seconds": 1.789,
+   "text": "You want my turn? Then DANCE for it!"
+  },
+  "42065714e2": {
+   "seconds": 2.583,
+   "text": "Hey! Can't you see I'm WAITING? This stall is mine next."
+  },
+  "546f69a4f3": {
+   "seconds": 1.938,
+   "text": "OK, OK... you go first!"
+  },
+  "7730b845cd": {
+   "seconds": 0.654,
+   "text": "Too slow!"
+  },
+  "81cb738a09": {
+   "seconds": 1.942,
+   "text": "Not here! WAITING ROOM, everybody!"
+  },
+  "d212fff42d": {
+   "seconds": 0.827,
+   "text": "Ha! AGAIN!"
+  }
+ },
+ "sneaky": {
+  "0d67d44fe5": {
+   "seconds": 2.232,
+   "text": "Outta my way, shorty! I'm going first."
+  },
+  "2d2d34a6aa": {
+   "seconds": 1.102,
+   "text": "Oh yeah? Make me!"
+  },
+  "54ff65701a": {
+   "seconds": 2.493,
+   "text": "You beat my crew? Cute. CREW! BROWN WATER, NOW!"
+  },
+  "76882eef0d": {
+   "seconds": 1.719,
+   "text": "Then I'll just have to shut you up!"
+  },
+  "a2b22632c5": {
+   "seconds": 2.52,
+   "text": "Shhh... nobody saw me slip in, right?"
+  },
+  "a3dd3b89a1": {
+   "seconds": 2.158,
+   "text": "I own this toilet. Everybody out!"
+  }
+ }
+}
