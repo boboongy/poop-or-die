@@ -56,6 +56,18 @@ func _init() -> void:
 			l.light_energy = float(opt.energy)
 	if opt.has("exp"):
 		env.tonemap_exposure = float(opt.exp)
+	if opt.has("lights"): # lights=0: every spot hidden; lights=noshadow: no spot casts shadows (the lighting script's update stopped)
+		var ll := lvl.find_child("Lighting", false, false)
+		if ll != null:
+			ll.set_process(false)
+		for l in lights:
+			l.shadow_enabled = false
+			if opt.lights == "0":
+				l.visible = false
+	if opt.has("hide"): # hide=FloodWater: every node with that name
+		for n in lvl.find_children(opt.hide, "Node3D", true, false):
+			(n as Node3D).visible = false
+			print("PROBE hid ", n.get_path())
 	if opt.scale != "":
 		vp.scaling_3d_scale = float(opt.scale)
 	if opt.msaa != "":

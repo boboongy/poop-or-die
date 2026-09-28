@@ -46,8 +46,8 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 
 ## Next steps (in order)
 -2. **RED, fix first: `test_flood_chain` (no walkers): reward stall never frees (30 s; was 2.25 s).** Needs BOTH session-4 edits (npc_jijio WebMerge line + liminal_lighting); either reverted = green; both inert on desktop: suspect an order-sensitive reward-stall bug (not proven). Suite 79/81 (+ flood_swim = 1b).
--1. **WEB FIX DONE + republished 2026-09-28 (HISTORY).** Chrome here 2-4 -> 12-16 FPS; owner's PC not measured. Owner: check github.io. `index.html?probe` = frame timings.
-0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look (Bob's back still dark there) and FPS.
+-1. **WEB SPEED 2 (owner: >= 20 FPS, Chrome, this laptop, all levels; plan OK):** no shadows + feet blob, merge scenery, hide Jijios > 18 m; `tools/web_fps.py`. L3: 672 draws, shadow ~220. **Bug: web flood water BLACK** (mipmaps?).
+0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look and FPS.
 1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
 1b. `test_flood_swim` queue-home red was intermittent (1 of 1 green this session); the test now prints a per-second TRACE when it fails.
 1c. **Stage 9 scoreboard** (SPEC; Talo needs the owner's account/API key: ask first), then Stage 5 mobile (on hold).
