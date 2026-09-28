@@ -35,10 +35,13 @@ func cm_fight(lvl: Node) -> Node:
 	return lvl.cutters.fight
 
 
-func _check_handed_back(lvl: Node, what: String) -> void:
+func _check_handed_back(lvl: Node, what: String, after_loss := false) -> void:
 	var p = lvl.player
 	var own: Camera3D = p.get_node("CameraPivot/SpringArm3D/Camera3D")
-	T.check(p.get_viewport().get_camera_3d() == own, "%s: Bob's own camera is on" % what)
+	# Stage 6d: a loss first cuts for 1 s to behind Bob (shat_stain.gd); wait for the cut to end, then his own camera must be back
+	if after_loss:
+		await T.wait_for(self, func() -> bool: return lvl.shat_stain.cut_camera == null and lvl.shat_stain.cuts >= 1, 3.0)
+	T.check(p.get_viewport().get_camera_3d() == own, "%s: Bob's own camera is on (after the 1 s look from behind)" % what)
 	T.check(is_equal_approx(Engine.time_scale, 1.0) and p.shoulder == 0.0, "%s: normal time, camera behind Bob" % what)
 	var arm: SpringArm3D = p.get_node("CameraPivot/SpringArm3D")
 	T.check(arm.spring_length > 2.1 and p.model().is_visible_in_tree(), "%s: third person, Bob visible (arm %.2f)" % [what, arm.spring_length])
@@ -72,7 +75,7 @@ func _init() -> void:
 		await T.wait(self, 0.4) # the camera's 0.3 s slide back to third person
 		T.check(lvl._result.visible and lvl._result.text.begins_with("KNOCKED OUT!"), "%s: fail screen ('%s')" % [what, lvl._result.text.replace("\n", " | ")])
 		T.check(not lvl._running and lvl._game_over, "%s: the timer stopped" % what)
-		_check_handed_back(lvl, what)
+		await _check_handed_back(lvl, what, true)
 		await T.key(self, KEY_R)
 		await T.wait(self, 0.8)
 		var fresh: Node = current_scene
@@ -92,7 +95,7 @@ func _init() -> void:
 		await T.wait(self, 0.2)
 		T.check(lvl.cutters.fight == null and not is_instance_valid(f), "%s: the fight is aborted (and freed with its HUD)" % what)
 		await T.wait(self, 0.3) # the camera's slide back to third person
-		_check_handed_back(lvl, what)
+		await _check_handed_back(lvl, what)
 		T.check(lvl.population.walkers.all(func(w: Node3D) -> bool: return w.visible), "%s: walkers shown again" % what)
 		await T.wait_for(self, func() -> bool: return lvl._result.visible, 25.0)
 		T.check(lvl._result.text.begins_with("THEY KICKED YOU OUT"), "%s: the kick-out screen ('%s')" % [what, lvl._result.text.replace("\n", " | ")])
