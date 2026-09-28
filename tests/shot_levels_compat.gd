@@ -31,6 +31,12 @@ func _init() -> void:
 		while Time.get_ticks_msec() - t0 < 3000:
 			await process_frame
 		await _snap("%s_level%d.png" % [tag, n])
+		if n == 3: # the flood: raise the water to 0.5 m so the web build's water can be compared with Forward+
+			lvl.water.depth = 0.5
+			t0 = Time.get_ticks_msec()
+			while Time.get_ticks_msec() - t0 < 1500:
+				await process_frame
+			await _snap("%s_level3_water.png" % tag)
 		var frames := 0
 		t0 = Time.get_ticks_msec()
 		while Time.get_ticks_msec() - t0 < 4000:

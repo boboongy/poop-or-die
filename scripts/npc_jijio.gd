@@ -6,6 +6,7 @@ extends CharacterBody3D
 const Pose := preload("res://scripts/pose.gd")
 const Sfx := preload("res://scripts/sfx.gd")
 const Footsteps := preload("res://scripts/footsteps.gd")
+const WebMerge := preload("res://scripts/web_merge.gd")
 
 signal arrived
 signal reached ## finished walking to a go_to() spot
@@ -109,6 +110,8 @@ var _kick_room_check := 0.0
 func _ready() -> void:
 	add_child(Footsteps.new())
 	add_to_group("jijio")
+	if WebMerge.wanted(): # the web build: her 9 meshes drawn as 3 (WebGL draw calls were the 3-4 FPS)
+		WebMerge.merge(_model)
 
 
 ## Make this Jijio interactable: Bob gets `prompt_text` next to them and E calls `callback(player)`.

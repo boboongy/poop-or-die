@@ -168,7 +168,12 @@ func _init() -> void:
 	T.check(mm.is_done("mop") and lvl._all_done, "all missions done (%.1f s left)" % lvl._time_left)
 	print("INFO  peak water %.2f m, %d mop strokes, %.1f s of 150 used (a bot with perfect steering; teleports between tasks)" % [peak, mop.strokes, 150.0 - lvl._time_left])
 	p.global_position = Vector3(-3.7, 0.05, 0.4)
-	await T.wait(self, 9.0)
+	var waited := 0.0
+	while waited < 30.0 and not mission_label.text.contains("is free"):
+		await T.wait(self, 0.25)
+		waited += 0.25
+	print("INFO  the reward stall was free after %.2f s" % waited)
+	await T.wait(self, 9.0 - minf(waited, 9.0))
 	var label := mission_label.text
 	T.check(label.contains("is free"), "reward stall announced ('%s')" % label)
 	T.check(not label.contains("Stall %d (row %d)" % [story.stall % 10 + 1, 1 if story.stall < 10 else 2]), "the reward is not the clogged stall (%s)" % story.stall_text())

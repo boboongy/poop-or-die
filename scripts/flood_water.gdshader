@@ -50,6 +50,9 @@ float caustic(vec2 p, float t) {
 }
 
 vec3 view_pos(vec2 uv, float d, mat4 inv_proj) {
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	d = d * 2.0 - 1.0; // the web build's renderer keeps depth in -1..1, Forward+ in 0..1 (without this the water was invisible there)
+#endif
 	vec4 v = inv_proj * vec4(uv * 2.0 - 1.0, d, 1.0);
 	return v.xyz / v.w;
 }

@@ -125,6 +125,7 @@ static func _tint(body: Node3D, color: Color) -> void:
 			var base := m.get_active_material(s)
 			var mat: StandardMaterial3D = (base.duplicate() if base is StandardMaterial3D else StandardMaterial3D.new())
 			mat.albedo_texture = null
+			mat.vertex_color_use_as_albedo = false # the web build's merged hair+shirt mesh carries its colours per vertex
 			mat.albedo_color = color
 			mat.emission_enabled = true
 			mat.emission = color
