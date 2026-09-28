@@ -1,7 +1,8 @@
 extends Node
 ## Web build diagnosis (added by liminal_lighting.gd, web only): every 3 s prints the FPS and where the frame time goes to the
 ## browser console when the page address has any switch (index.html?probe), e.g. index.html?chars=0&anim=0:
-##   chars=0 hide every character, anim=0 freeze every Jijio's AnimationPlayer, phys=0 stop physics.
+##   chars=0 hide every character, anim=0 freeze every Jijio's AnimationPlayer, phys=0 stop physics,
+##   refl=0 hide the reflection probe.
 
 var _next := 0 ## wall-clock msec of the next report
 var _query := {}
@@ -26,6 +27,9 @@ func _process(_delta: float) -> void:
 		set_process(false)
 		return
 	var now := Time.get_ticks_msec()
+	if _query.get("refl") == "0":
+		for n in get_tree().root.find_children("*", "ReflectionProbe", true, false):
+			(n as Node3D).visible = false
 	if _query.get("chars") == "0" or _query.get("anim") == "0":
 		for s in get_tree().get_nodes_in_group("jijio"):
 			if _query.get("anim") == "0":

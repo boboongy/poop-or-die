@@ -4,7 +4,7 @@ extends Node3D
 ## adds RATE_PER_SOURCE metres a second, so all five fill it to MAX_DEPTH in about 60 s; it holds there. Turning a source off slows
 ## the rise by a fifth. `start_drain()` works only when no source runs; then the water goes down to nothing in DRAIN_SECONDS.
 ## Before the floor is covered the water only shows round the sources, spreading at SPREAD_SPEED (the trickle out of the stall).
-## Look: flood_water.gdshader. While the camera is under the surface the screen goes murky (fog + a tinted overlay).
+## Look: flood_water.gdshaderinc (desktop flood_water.gdshader, web flood_water_web.gdshader). While the camera is under the surface the screen goes murky (fog + a tinted overlay).
 
 signal drained ## the water is all gone
 signal sources_changed
@@ -20,6 +20,7 @@ const SWIM_DEPTH := 0.75 ## deeper than this, everyone swims (player.gd, npc flo
 const AREA := Rect2(-5.3, -6.1, 17.95, 8.1)
 const UNDER_FOG := Color(0.2, 0.26, 0.17)
 const SHADER := preload("res://scripts/flood_water.gdshader")
+const SHADER_WEB := preload("res://scripts/flood_water_web.gdshader") ## no depth-buffer read: WebGL cannot copy it (the water was black)
 const Sfx := preload("res://scripts/sfx.gd")
 
 var depth := 0.0
@@ -38,7 +39,7 @@ var _saved_fog := {}
 func setup(level_node: Node3D) -> void:
 	level = level_node
 	_mat = ShaderMaterial.new()
-	_mat.shader = SHADER
+	_mat.shader = SHADER_WEB if OS.has_feature("web") else SHADER
 	_mat.set_shader_parameter("normal_a", _normal_tex(0.018, 1))
 	_mat.set_shader_parameter("normal_b", _normal_tex(0.045, 2))
 	var mesh := PlaneMesh.new()
@@ -64,20 +65,18 @@ func setup(level_node: Node3D) -> void:
 	layer.add_child(_overlay)
 
 
-static func _normal_tex(frequency: float, seed_value: int) -> NoiseTexture2D:
+## Built here, not as a NoiseTexture2D: that one is generated on a worker thread, and in the web build (no threads) the water came out
+## BLACK (2026-09-28, Chrome, Level 3).
+static func _normal_tex(frequency: float, seed_value: int) -> ImageTexture:
 	var noise := FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = frequency
 	noise.seed = seed_value
 	noise.fractal_octaves = 3
-	var tex := NoiseTexture2D.new()
-	tex.width = 256
-	tex.height = 256
-	tex.seamless = true
-	tex.as_normal_map = true
-	tex.bump_strength = 6.0
-	tex.noise = noise
-	return tex
+	var img := noise.get_seamless_image(256, 256)
+	img.bump_map_to_normal_map(6.0)
+	img.generate_mipmaps()
+	return ImageTexture.create_from_image(img)
 
 
 ## A source starts running (or keeps running): `id` names it ("toilet", "sink3"), `pos` is where it spills onto the floor.
