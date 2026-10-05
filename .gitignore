@@ -10,6 +10,7 @@ mono_crash.*.json
 # local Claude Code state (per machine)
 .claude/hook_state.json
 .claude/last_full_run.json
+.claude/last_look.json
 .claude/settings.local.json
 # editor / OS / Python
 .vscode/
