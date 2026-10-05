@@ -53,6 +53,16 @@
             "statusMessage": "Checking the file for hidden characters..."
           }
         ]
+      },
+      {
+        "matcher": "Read|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/look_marker.py\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Notification": [

@@ -3,7 +3,10 @@
 1. TESTS STALE: some source file (scripts, scenes, tests) is newer than the last full passing `bash tests/run.sh`
    (tests/run.sh writes .claude/last_full_run.json after an unfiltered run), or the last full run failed.
    -> block once: "run the suite (about a minute) and report it, or say why not".
-2. RETRO DUE: tests are fresh and green, code changed today, and HISTORY.md has no RETRO entry dated today.
+2. LOOK STALE: a VISIBLE file (scenes/*.tscn, *.gdshader) is newer than the last look at the game
+   (.claude/last_look.json, written by look_marker.py when a .png is read or a shot_* command runs).
+   -> block once: "take the player-eye screenshot before reporting, or say why not" (skill top rule 3).
+3. RETRO DUE: tests are fresh and green, code changed today, and HISTORY.md has no RETRO entry dated today.
    -> block once: "if this is the end of a stage, write the 5-line retro and a skill line; otherwise ignore".
 
 Never loops (stop_hook_active), never fails hard: any error just lets Claude stop. State: .claude/hook_state.json.
@@ -16,8 +19,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ROOT / ".claude" / "hook_state.json"
 MARKER = ROOT / ".claude" / "last_full_run.json"
+LOOK = ROOT / ".claude" / "last_look.json"
 HISTORY = ROOT / "HISTORY.md"
 SOURCE_GLOBS = ["scripts/**/*.gd", "scripts/**/*.gdshader", "scenes/**/*.tscn", "tests/**/*.gd", "tests/run.sh"]
+# Files the player SEES the moment they change: a screenshot is the only check.
+VISIBLE_GLOBS = ["scenes/**/*.tscn", "scripts/**/*.gdshader", "scripts/**/*.gdshaderinc"]
 
 
 def load(path, default):
@@ -25,6 +31,17 @@ def load(path, default):
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return default
+
+
+def newest_mtime(patterns):
+    newest = 0.0
+    for pattern in patterns:
+        for path in ROOT.glob(pattern):
+            try:
+                newest = max(newest, path.stat().st_mtime)
+            except OSError:
+                pass
+    return newest
 
 
 def newest_source_mtime():
@@ -74,7 +91,20 @@ def main():
             "(or the last full run failed). Run `bash tests/run.sh` now (about a minute) and report the result, "
             "or tell the owner why you did not. Then finish your report with the one-line `Skill check:`."
         )
-    elif not stale and newest > 0 and time.strftime("%Y-%m-%d", time.localtime(newest)) == time.strftime("%Y-%m-%d") \
+    visible = newest_mtime(VISIBLE_GLOBS)
+    looked = float(load(LOOK, {}).get("time", 0))
+    if not reason and visible > looked + 2 and not mine.get("look"):
+        mine["look"] = True
+        reason = (
+            "STOP GUARD (skill top rule 3, the player-eye pass): a file the player SEES "
+            f"(scenes/*.tscn or a shader) changed, and no screenshot has been looked at since. "
+            "Measured over 17 retros: a look-or-feel judgement was the top reason a fix needed a "
+            "second owner round (7 of 17). Take a shot from the game's default camera in the real "
+            "flow, look at it (read the .png), and report Seen - or say in one sentence why no "
+            "screenshot applies (a shader used only in the web build, a scene with no visual change)."
+        )
+    if not reason and not stale and newest > 0 \
+            and time.strftime("%Y-%m-%d", time.localtime(newest)) == time.strftime("%Y-%m-%d") \
             and not mine.get("retro") and not retro_written_today():
         mine["retro"] = True
         reason = (
