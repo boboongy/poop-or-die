@@ -42,12 +42,12 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 
 ## Build and share
 - **Web build:** `"<console exe>" --headless --path . --export-release "Web" build/web/index.html` (templates in `%APPDATA%/Godot/export_templates/4.7.2.stable`, web files only). Try it: `python -m http.server 8000 -d build/web`, open http://localhost:8000. `python tools/web_smoke.py <dir>` = headless-Chrome check.
-- **GitHub:** `boboongy/mi-godot` (PRIVATE; `build/` is not in git). Public + GitHub Pages is the owner's call.
+- **GitHub:** `boboongy/poop-or-die` (PUBLIC; `build/` is not in git). **Push after every session: on 2026-10-10 the remote was 6 commits behind, so the laptop was the only copy.**
 
 ## Next steps (in order)
--3. **Workflow measured per feature + per token source (2026-10-06, HISTORY):** `workflow_stats.py --features|--costs`. Owner's calls: run the A/B test (`references/ab-test.md`); MCP servers off in this project? (13 % of tokens is fixed per call).
--2. **YOUTUBE VIDEO (owner, 2026-10-05): read `VIDEO_SCRIPT.md`** (script, measured figures, the open footage-capture choice A/B/C).
--1. **Web water: the BLACK bug is fixed (2026-09-29), the toned-down colour NOT seen yet.** Shader `flood_water_web.gdshader`; cause, pixel readings and `web_light` in HISTORY session 5.
+-3. **Workflow measured per feature + token source (HISTORY):** `workflow_stats.py --features|--costs`. Owner's calls: run the A/B test (`references/ab-test.md`); MCP servers off in this project? (13 % of tokens is fixed per call).
+-2. **FULLSCREEN FPS = TOP (owner 2026-10-10): 20 FPS windowed, 10 at 1080p, blocks the video. Plan + ladder: `PERF_PLAN.md`.** Script: `VIDEO_SCRIPT.md`.
+-1. **Web water: BLACK bug fixed, toned-down colour NOT seen.** `flood_water_web.gdshader`; HISTORY session 5.
 -0.5. **NEXT: WEB SPEED 2 (>= 20 FPS, Chrome, all levels; plan OK):** no shadows + feet blob, merge scenery, hide Jijios > 18 m; `tools/web_fps.py`. L3 Chrome 32-40 FPS, later 11-16 the same night (cause unknown: remeasure).
 0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look and FPS.
 1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
