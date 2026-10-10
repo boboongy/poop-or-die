@@ -165,3 +165,66 @@ at 1920x1080 on all 5 levels:**
 2. Merge the scenery meshes (static geometry is the rest of the ~500 baseline calls).
 3. A real shadows-off test + feet blob, once the probe trap is fixed.
 4. Re-confirm in Chrome, then one export and one deploy to `gh-pages` (which also finally ships the water fix).
+
+### What that ladder was worth - MEASURED 2026-10-11, same session (it was worth nothing)
+
+**Rung 1 is dead on arrival: there is no Jijio beyond 18 m.** The probe now prints a distance line every run
+(`PROBE dist`), and on L3/L4 all 31-34 of them sit inside 18 m of the default camera (`<6m 3-9, 6-12m 12-20,
+12-18m 10-11, >18m 0`), so `far=18` hid 0 characters and saved 0 draw calls. `far=12` hides 10 Jijios for -29 calls
+and -0.8 FPS native: not worth the pop-in. **The room is 18 m deep - distance culling is not a lever in this game.**
+
+**The shadow rung is big and free, so it was taken** (`lights=noshadow`, which stops the 0.25 s updater first):
+
+| Level | draw calls with nearest-1 shadow | with no shadow | native FPS |
+|---|---|---|---|
+| L1 | 643 | 348 (-46 %) | 57.0 -> 60.3 |
+| L3 | 657 | 356 (-46 %) | 46.8 -> 52.8 |
+| L4 | 653 | 362 (-45 %) | 47.8 -> 54.8 |
+
+A 2x2 contact sheet (L1 and L3, default camera, with and without) shows **no visible difference**: against
+`COMPAT_AMBIENT 6.0` the one spot cone casts nothing the player can see. So `liminal_lighting.gd` now switches every
+shadow off in compat and `_update_shadow_light()` is gone (`test_web_build.gd` asserts no spot casts a shadow under
+each of the 10 spot positions). No feet blob: there was no shadow under anyone to replace.
+
+**And then the draw-call theory failed its own test. Chrome, fresh export, 1920x1080, 3 x 5 s:**
+
+| Level | FPS before (653 calls) | FPS after (~350 calls) | render CPU before -> after |
+|---|---|---|---|
+| L1 | 12.6 | 13.2 | 25.5 -> 26.5 ms |
+| L2 | 14.4 | 13.2 | 23.0 -> 20.6 ms |
+| L3 | 10.6 | 8.6 | 44.3 -> 43.4 ms |
+| L4 | 9.2 | 8.4 | 39.2 -> 46.0 ms |
+| L5 | 11.8 | 9.8 | 32.5 -> 35.1 ms |
+
+**Half the draw calls bought nothing** - not even in render CPU. So the browser's 4.4x is not per-call overhead
+either. Keep the shadows-off change anyway: it is free speed on the native compat path and costs no look.
+
+### Where the web frame actually goes - MEASURED IN CHROME 2026-10-11 (one factor each, 2 x 5 s per level)
+
+All at 1920x1080 on the shadows-off build, via the switches `web_probe.gd` already had
+(`index.html?anim=0|chars=0|phys=0`), plus a plain run at 1280x720 and one at 1080p with `COMPAT_SCALE 0.5`:
+
+| Level | baseline 1080p | `anim=0` | `chars=0` | `phys=0` | 720p | 1080p @ scale 0.5 |
+|---|---|---|---|---|---|---|
+| L1 | 13.2 | 11.2 | **18.8** | 13.0 | 16.4 | 13.0 |
+| L2 | 13.2 | 12.4 | **17.2** | 13.4 | **19.8** | 16.2 |
+| L3 | 8.6 | 9.8 | **12.8** | 12.2 | 14.6 | 11.6 |
+| L4 | 8.4 | 8.4 | **12.4** | 11.6 | 12.4 | 10.2 |
+| L5 | 9.8 | 11.0 | **18.0** | 12.8 | 17.0 | 13.0 |
+
+Read, in order of size:
+1. **Drawing the characters is the biggest single cost (+4 to +8 FPS when hidden), but posing them is free**
+   (`anim=0` changed nothing, and the animation throttle already caps that). So it is the ~32 x 9,774 skinned
+   vertices per frame, not the AnimationPlayers and not the 160 draw calls they cost.
+2. **Physics is second** (+3 FPS on L3-L5, where `web_probe` shows 6-12 ms per frame).
+3. **Pixels DO matter in the browser, though they were free natively** (native L3: 720p 46.5 vs 1080p 46.8; Chrome
+   L3: 14.6 vs 8.6). A native probe does not predict the browser - never rank a web rung without a Chrome run.
+4. 720p beats 1080p-at-scale-0.5 everywhere (16.4/19.8/14.6/12.4/17.0 vs 13.0/16.2/11.6/10.2/13.0) although both
+   draw the same 960x540 of 3D: the HUD, the canvas blit and the page compositing are charged at the window size.
+
+**The 20 FPS bar is not reachable at 1920x1080 by tuning: even with every character hidden, L3/L4 sit at 12.4-12.8.**
+Three honest options for the owner (none is Claude's to pick):
+- **(a) A smaller canvas on the page** (fix the game to 1280x720 and let CSS stretch it): measured 12.4-19.8 FPS,
+  no gameplay or asset change, the whole cost is sharpness.
+- **(b) Cheaper characters** (a low-poly web Jijio from the factory, or a smaller crowd on web): worth +4 to +8 FPS.
+- **(c) Accept the web build as a slow demo** and keep the desktop build as the real one.

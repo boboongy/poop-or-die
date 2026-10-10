@@ -2,9 +2,12 @@ extends SceneTree
 ## Web-build FPS probe (windowed, real time; not run by run.sh): one level from the default camera, the FPS over 4 s with the
 ## settings given on the command line. Run it with the web build's renderer, one process per setting:
 ##   "<console exe>" --path . --rendering-method gl_compatibility --script tests/probe_compat_fps.gd -- level=3 [shadows=all|near|none]
-##   [scale=0.75] [msaa=0|1] [chars=0] [range=7] [size=1920x1080]
-## ALWAYS state the window size with the number: this frame is fill-rate bound, so the 1280x720 default reads about 3x the FPS
-## of 1920x1080, which is how the owner plays (fullscreen). The old "L3 32-40 FPS" was a 720p number (owner, 2026-10-11).
+##   [scale=0.75] [msaa=0|1] [chars=0] [range=7] [size=1920x1080] [far=18]
+## ALWAYS state the window size with the number, but do NOT expect it to change much: measured 2026-10-11 at
+## `shadows=near scale=0.75`, L3 ran 46.5 FPS at 1280x720 and 46.8 at 1920x1080, so this frame is NOT fill-rate bound and
+## the lever is the DRAW-CALL count (PERF_PLAN.md "Web speed 2"). `shadows=none` alone is undone every 0.25 s by
+## liminal_lighting.gd's `_update_shadow_light()`: use `lights=noshadow`, which stops that node's `_process` first.
+## Every run prints a PROBE dist line (how many Jijios sit in each distance band from the default camera).
 const Progress := preload("res://scripts/progress.gd")
 const Intro := preload("res://scripts/intro.gd")
 
@@ -130,6 +133,51 @@ func _init() -> void:
 			if (ap as Node).find_parent("Player") == null:
 				(ap as AnimationPlayer).callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 				aps.append(ap)
+	# Rung 1 of the web ladder: hide every Jijio further than `far` metres from the default camera. The dist line is always
+	# printed, so a run also says how many characters such a cull would remove on this level.
+	var cam2 := vp.get_camera_3d()
+	var jijios: Array = lvl.get_tree().get_nodes_in_group("jijio")
+	if cam2 != null:
+		var bands := [6.0, 12.0, 18.0, 25.0]
+		var counts := [0, 0, 0, 0, 0]
+		for npc in jijios:
+			var d: float = cam2.global_position.distance_to((npc as Node3D).global_position)
+			var b := bands.size()
+			for i in bands.size():
+				if d < bands[i]:
+					b = i
+					break
+			counts[b] += 1
+		print("PROBE dist %d Jijios: <6m %d, 6-12m %d, 12-18m %d, 18-25m %d, >25m %d" % [jijios.size(),
+			counts[0], counts[1], counts[2], counts[3], counts[4]])
+		if opt.has("far"):
+			var limit := float(opt.far)
+			var hidden := 0
+			for npc in jijios:
+				if cam2.global_position.distance_to((npc as Node3D).global_position) > limit:
+					(npc as Node3D).visible = false
+					hidden += 1
+			print("PROBE far=%.0f hid %d of %d Jijios" % [limit, hidden, jijios.size()])
+	if opt.has("scene"): # scene=info: the STATIC meshes (everything not under a Skeleton3D), grouped by their top ancestor
+		var by_group := {}
+		var total := 0
+		var surfs2 := 0
+		for m in lvl.find_children("*", "MeshInstance3D", true, false):
+			var mi := m as MeshInstance3D
+			if mi.mesh == null or mi.skin != null or not mi.is_visible_in_tree():
+				continue
+			var top: Node = mi
+			while top.get_parent() != null and top.get_parent() != lvl:
+				top = top.get_parent()
+			var k: String = "%s/%s" % [top.name, mi.get_parent().name]
+			by_group[k] = by_group.get(k, 0) + mi.mesh.get_surface_count()
+			total += 1
+			surfs2 += mi.mesh.get_surface_count()
+		var keys: Array = by_group.keys()
+		keys.sort_custom(func(a, b): return by_group[a] > by_group[b])
+		for k in keys.slice(0, 12):
+			print("PROBE scene  %-44s %d surfaces" % [k, by_group[k]])
+		print("PROBE scene: %d static meshes, %d surfaces, %d groups" % [total, surfs2, by_group.size()])
 	var tick := 0
 	if opt.has("webprobe"):
 		lvl.add_child(load("res://scripts/web_probe.gd").new())

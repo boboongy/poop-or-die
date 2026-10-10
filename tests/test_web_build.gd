@@ -62,17 +62,19 @@ func _init() -> void:
 	T.check(Cutters.is_tinted(j0, Color.RED) and tint != null and not tint.vertex_color_use_as_albedo,
 		"cutters.gd tints the merged hair+shirt (vertex colours off)")
 
-	# 4. one shadow, following Bob: stand under every spot light
+	# 4. NO shadow at all on the web, wherever Bob stands: stand under every spot light and wait out the old 0.25 s updater.
+	# Measured 2026-10-11 (probe_compat_fps.gd, L3/L4, 1920x1080): the single nearest-1 shadow pass was 301 of 657 draw calls
+	# (-46 %) and nothing in the compat picture changed when it went (PERF_PLAN.md "Web speed 2").
 	var spots := lvl.find_children("*", "SpotLight3D", true, false)
 	var wrong := 0
 	for s in spots:
 		p.global_position = Vector3((s as Node3D).global_position.x, p.global_position.y, (s as Node3D).global_position.z)
 		await T.wait(self, 0.4)
 		var shadowed := spots.filter(func(l): return l.shadow_enabled)
-		if shadowed.size() != 1 or shadowed[0] != s:
+		if not shadowed.is_empty():
 			wrong += 1
 			print("  under %s: shadowed %s" % [s.name, shadowed.map(func(l): return l.name)])
-	T.check(spots.size() == 10 and wrong == 0, "only the spot above Bob casts shadows, under each of %d spots (wrong %d)" % [spots.size(), wrong])
+	T.check(spots.size() == 10 and wrong == 0, "no spot casts a shadow on the web, under each of %d spots (wrong %d)" % [spots.size(), wrong])
 	var vp := get_root()
 	T.check(vp.msaa_3d == Viewport.MSAA_DISABLED and is_equal_approx(vp.scaling_3d_scale, 0.75), "MSAA off, 3D scale 0.75")
 

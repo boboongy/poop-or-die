@@ -46,10 +46,10 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 
 ## Next steps (in order)
 -3. **Workflow stats:** `workflow_stats.py --features|--costs`. Owner's calls: the A/B test (`references/ab-test.md`); MCP servers off here? (13 % of tokens is fixed per call).
--2. **DESKTOP FPS tier: owner ran it 2026-10-11 and said "the game is good"** (windowed; the probe demoted to MEDIUM on both launches, 11 and 14 FPS medians). `liminal_lighting.gd`, numbers in `PERF_PLAN.md`, `--perf=high|med|low` forces a tier. **Desktop only - web is excluded (`is_compat()`).** Recording: hardware encode, `VIDEO_SCRIPT.md`.
+-2. **DESKTOP FPS tier: DONE, owner approved 2026-10-11** ("the game is good"; it demoted to MEDIUM both launches). `--perf=high|med|low` forces a tier, numbers in `PERF_PLAN.md`; desktop only (`is_compat()` excluded). Recording: `VIDEO_SCRIPT.md`.
 -1. **Web water: BLACK bug fixed, toned-down colour NOT seen** (and not yet deployed). `flood_water_web.gdshader`.
--0.5. **NEXT = WEB SPEED 2. Measured 2026-10-11 (numbers, trap and the corrected ladder: `PERF_PLAN.md` "Web speed 2"). Chrome 1920x1080: 9.2-14.4 FPS, every level FAILS the >= 20 bar.** Resolution is irrelevant; **cut DRAW CALLS** (native 46.8 vs Chrome 10.6 FPS at ~653 calls). Ladder: Jijios > 18 m, merge scenery, shadows-off. `origin/gh-pages` is the 09-28 build: one deploy after the ladder.
-0. **Owner playtest of the web build in a browser** (the editor pass is done: "the game is good"): the web look, and the FPS once the ladder lands.
+-0.5. **WEB SPEED 2: measured out (all numbers `PERF_PLAN.md`). SHIPPED: no shadow in compat** (-46 % draw calls, no visible change). The ladder was wrong twice: no Jijio is beyond 18 m, and halving draw calls moved Chrome 0 FPS. Chrome 1080p costs: characters drawn +4-8 FPS if hidden, physics +3, pixels (720p 12.4-19.8 vs 1080p 8.4-13.2); posing free. **20 FPS at 1080p is unreachable by tuning. OWNER DECIDES: (a) 1280x720 canvas on the page, (b) cheaper/fewer web characters, (c) accept a slow demo.** No deploy; `gh-pages` = 09-28 build.
+0. **Owner playtest of the web build in a browser** once (a)/(b)/(c) above is picked: the look and the FPS.
 1. **BUG, most visible (Seen in every windowed shot, both renderers):** Bob and Jijios stand ARMS OUT (A-pose) while headless says `idle` plays: probe the arm bones windowed vs headless (AnimationPlayer callback mode? the idle clip?).
 1b. `test_flood_swim` queue-home red is intermittent (prints a per-second TRACE on failure).
 1c. **Stage 9 scoreboard** (SPEC; Talo needs the owner's account/API key: ask first), then Stage 5 mobile (on hold).

@@ -7,8 +7,10 @@ Needs: pip install playwright (uses the installed Chrome, channel="chrome"). Clo
 halves the numbers). Run from the project folder:
   python tools/web_fps.py <out_dir> [runs=3] [extra query, e.g. "&chars=0"]
 
-SIZE=<w>x<h> sets the viewport (default 1280x720). ALWAYS state the size with the number: the frame is fill-rate bound, so
-SIZE=1920x1080 (how the owner plays, fullscreen) runs about a third of 720p's FPS. The old "L3 32-40 FPS" was 720p.
+SIZE=<w>x<h> sets the viewport (default 1280x720); always state it with the number, but do NOT expect it to matter much:
+measured 2026-10-11, native compat L3 ran 46.5 FPS at 720p and 46.8 at 1080p, so the frame is NOT fill-rate bound. What the
+browser charges for is DRAW CALLS (native 46.8 vs Chrome 10.6 FPS at the same ~653 calls), so rank rungs by the draw-call
+delta in tests/probe_compat_fps.gd and confirm the winner here (PERF_PLAN.md "Web speed 2").
 """
 import functools
 import http.server

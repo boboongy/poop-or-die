@@ -63,7 +63,6 @@ var _perf_elapsed := 0.0
 var _measuring := false
 
 var _spots: Array[SpotLight3D] = []
-var _shadow_wait := 0.0
 var _throttle: Node = null
 
 @onready var toilet: Node3D = $"../NavRegion/Toilet"
@@ -122,11 +121,16 @@ func apply_quality(q: Quality) -> void:
 		env.adjustment_contrast = COMPAT_CONTRAST
 		env.adjustment_saturation = COMPAT_SATURATION
 		# Speed (owner 2026-09-28: 7 FPS on github.io; tests/probe_compat_fps.gd, Level 3, 3 runs each: 8.5 -> about 31 FPS):
-		# only the light nearest Bob casts shadows, no MSAA (its depth copy also failed in WebGL, which hid the flood water),
-		# 3D drawn at 0.75 scale, far Jijios animated every 3rd frame.
+		# no MSAA (its depth copy also failed in WebGL, which hid the flood water), 3D drawn at 0.75 scale, far Jijios
+		# animated every 3rd frame.
+		# Web speed 2 (2026-10-11): NO shadow at all. The nearest-1 shadow pass redrew every object a second time - 301 of
+		# 657 draw calls on L3 and 291 of 653 on L4 at 1920x1080 - and a 2x2 contact sheet (L1 and L3, default camera, with
+		# and without it) shows no visible difference in the compat picture: the one spot's cone is too weak against
+		# COMPAT_AMBIENT 6.0 to cast anything the player can see. The nearest-light updater is gone with it.
 		get_viewport().msaa_3d = Viewport.MSAA_DISABLED
 		get_viewport().scaling_3d_scale = COMPAT_SCALE
-		_update_shadow_light()
+		for spot in _spots:
+			spot.shadow_enabled = false
 		if _throttle == null:
 			_throttle = AnimThrottle.new()
 			add_child(_throttle)
@@ -149,21 +153,6 @@ func apply_quality(q: Quality) -> void:
 
 static func is_compat() -> bool:
 	return RenderingServer.get_current_rendering_method() == "gl_compatibility" or force_compat
-
-
-## Web build: only the spot light nearest Bob (the camera when there is no Bob) casts shadows.
-func _update_shadow_light() -> void:
-	var from: Node3D = get_tree().get_first_node_in_group("player")
-	if from == null:
-		from = get_viewport().get_camera_3d()
-	if from == null or _spots.is_empty():
-		return
-	var best: SpotLight3D = _spots[0]
-	for spot in _spots:
-		if spot.global_position.distance_squared_to(from.global_position) < best.global_position.distance_squared_to(from.global_position):
-			best = spot
-	for spot in _spots:
-		spot.shadow_enabled = spot == best and quality != Quality.LOW
 
 
 ## `--perf=high|med|low` on the command line (the owner's recording override): -1 when it was not given.
@@ -202,12 +191,6 @@ func _measure_tier(delta: float) -> void:
 func _process(delta: float) -> void:
 	if _measuring:
 		_measure_tier(delta)
-	if not is_compat():
-		return
-	_shadow_wait -= delta
-	if _shadow_wait <= 0.0:
-		_shadow_wait = 0.25
-		_update_shadow_light()
 
 
 func _tune_materials() -> void:
