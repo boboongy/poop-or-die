@@ -116,3 +116,52 @@ same camera). **The ambient is 0.5, not the web build's 1.2:** a 2x2 contact she
 **DECIDED: the tier is row 1 (40.6 FPS, 2.4x the baseline).** It clears the 30 FPS bar with room for OBS, keeps the
 green haze, the glow and every shadow, and needs no render-scale drop - only SDFGI's bounce is traded for ambient 1.2.
 Row 2 is the fallback if OBS eats more than 10 FPS.
+
+
+## Web speed 2 - MEASURED 2026-10-11 (the desktop tier above does NOT apply to web: `is_compat()` is excluded)
+
+Owner's report: the github.io page is still slow and the shadows still look heavy, while the editor now feels good.
+Both halves are true for different reasons - the page is a **2026-09-28 build** (`origin/gh-pages` = 4d07ac7, 13 days
+behind `main`, missing the water fix 37239b6), AND the browser-specific speed work was never written.
+
+**Baseline: a fresh export of `main`, real Chrome, viewport 1920x1080, min of 3 x 5 s rAF samples per level,
+ANGLE -> D3D11 on AMD Radeon** (`SIZE=1920x1080 python tools/web_fps.py <dir> 3`):
+
+| Level | FPS | draw calls | process (CPU main loop) | render CPU | GPU |
+|---|---|---|---|---|---|
+| L1 | 12.6 | 619 | 71.7 ms | 25.5 ms | unreadable in WebGL |
+| L2 | 14.4 | 486 | 84.2 ms | 23.0 ms | - |
+| L3 | 10.6 | 654 | 89.5 ms | 44.3 ms | - |
+| L4 | 9.2 | 659 | 84.4 ms | 39.2 ms | - |
+| L5 | 11.8 | 622 | 75.4 ms | 32.5 ms | - |
+
+Every level fails the >= 20 FPS bar; L4 is worst. `gpu 0.0` means WebGL cannot report GPU time, so a GPU stall and a
+CPU bottleneck look alike in `process`. Two one-factor probes settled it (`probe_compat_fps.gd`, native
+`gl_compatibility`, L3, `shadows=near scale=0.75`, 4 s each, 1 run per setting):
+
+1. **Resolution is irrelevant: 1280x720 -> 46.5 FPS, 1920x1080 -> 46.8 FPS.** The frame is NOT fill-rate bound, so
+   **the render-scale rung is dropped from the plan** (`COMPAT_SCALE` stays 0.75), and window size does NOT explain
+   the old "L3 32-40 then 11-16 the same night" (a concurrent test suite halves the numbers - likeliest cause).
+2. **Native 1080p 46.8 FPS vs Chrome 10.6 FPS = 4.4x browser overhead at ~653 draw calls/frame.** Same renderer, same
+   level. Each GL call crosses WASM -> JS -> ANGLE -> D3D11, so **draw-call count is the lever**, not pixels.
+
+Measured levers at 1920x1080 (native, so the FPS gain understates the browser gain; the draw-call delta is what
+transfers):
+
+| Setting | draw calls | FPS | read |
+|---|---|---|---|
+| baseline `shadows=near scale=0.75` | 663 | 46.8 | - |
+| `chars=0` (all characters hidden) | 502 (-24 %) | 56.3 | the characters are the biggest known block |
+| `range=7` | 665 | 45.3 | no effect - the option does not do what its name suggests |
+| `shadows=none` | 668 | 44.0 | **NOT MEASURED - see the trap below** |
+
+**TRAP: the probe's `shadows=none` is silently undone.** `liminal_lighting.gd:207-210` re-runs
+`_update_shadow_light()` every 0.25 s and switches the nearest spot back on, so the probe still printed `shadowed 1`
+and the shadow rung has no number yet. Fix the probe (or stop the timer) before trusting any shadow measurement.
+
+**Corrected ladder, cheapest first, one factor per measurement, stop at the first rung that clears 20 FPS in Chrome
+at 1920x1080 on all 5 levels:**
+1. Hide Jijios beyond ~18 m (the `chars=0` result says characters are worth about 160 draw calls).
+2. Merge the scenery meshes (static geometry is the rest of the ~500 baseline calls).
+3. A real shadows-off test + feet blob, once the probe trap is fixed.
+4. Re-confirm in Chrome, then one export and one deploy to `gh-pages` (which also finally ships the water fix).

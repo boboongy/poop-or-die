@@ -2,18 +2,21 @@ extends SceneTree
 ## Web-build FPS probe (windowed, real time; not run by run.sh): one level from the default camera, the FPS over 4 s with the
 ## settings given on the command line. Run it with the web build's renderer, one process per setting:
 ##   "<console exe>" --path . --rendering-method gl_compatibility --script tests/probe_compat_fps.gd -- level=3 [shadows=all|near|none]
-##   [scale=0.75] [msaa=0|1] [chars=0] [range=7]
+##   [scale=0.75] [msaa=0|1] [chars=0] [range=7] [size=1920x1080]
+## ALWAYS state the window size with the number: this frame is fill-rate bound, so the 1280x720 default reads about 3x the FPS
+## of 1920x1080, which is how the owner plays (fullscreen). The old "L3 32-40 FPS" was a 720p number (owner, 2026-10-11).
 const Progress := preload("res://scripts/progress.gd")
 const Intro := preload("res://scripts/intro.gd")
 
 
 func _init() -> void:
-	var opt := {"level": "3", "shadows": "", "scale": "", "msaa": "", "chars": "1", "range": ""}
+	var opt := {"level": "3", "shadows": "", "scale": "", "msaa": "", "chars": "1", "range": "", "size": "1280x720"}
 	for a in OS.get_cmdline_user_args():
 		var kv := a.split("=")
 		if kv.size() == 2:
 			opt[kv[0]] = kv[1]
-	get_root().size = Vector2i(1280, 720)
+	var wh: PackedStringArray = String(opt.size).split("x")
+	get_root().size = Vector2i(int(wh[0]), int(wh[1]))
 	Intro.enabled = false
 	Progress.level = int(opt.level)
 	var lvl: Node = load("res://scenes/level_toilet.tscn").instantiate()

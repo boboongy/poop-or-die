@@ -6,6 +6,9 @@ loop runs on them) RUNS times, keeps the probe lines, and saves one screenshot. 
 Needs: pip install playwright (uses the installed Chrome, channel="chrome"). Close heavy programs first (a running test suite
 halves the numbers). Run from the project folder:
   python tools/web_fps.py <out_dir> [runs=3] [extra query, e.g. "&chars=0"]
+
+SIZE=<w>x<h> sets the viewport (default 1280x720). ALWAYS state the size with the number: the frame is fill-rate bound, so
+SIZE=1920x1080 (how the owner plays, fullscreen) runs about a third of 720p's FPS. The old "L3 32-40 FPS" was 720p.
 """
 import functools
 import http.server
@@ -21,6 +24,7 @@ PORT = 8767
 out = sys.argv[1]
 runs = int(sys.argv[2]) if len(sys.argv) > 2 else 3
 extra = sys.argv[3] if len(sys.argv) > 3 else ""
+VW, VH = (int(n) for n in os.environ.get("SIZE", "1280x720").split("x"))
 os.makedirs(out, exist_ok=True)
 handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=os.path.join(ROOT, "build", "web"))
 http.server.SimpleHTTPRequestHandler.log_message = lambda *a: None
@@ -41,8 +45,10 @@ def on_console(m):
 
 summary = []
 with sync_playwright() as p:
-	b = p.chromium.launch(channel="chrome", headless=False, args=["--window-size=1300,800", "--autoplay-policy=no-user-gesture-required"])
-	pg = b.new_page(viewport={"width": 1280, "height": 720})
+	b = p.chromium.launch(channel="chrome", headless=False,
+		args=["--window-size=%d,%d" % (VW, VH + 80), "--autoplay-policy=no-user-gesture-required"])
+	pg = b.new_page(viewport={"width": VW, "height": VH})
+	print("viewport: %dx%d" % (VW, VH))
 	pg.on("console", on_console)
 	pg.goto("http://127.0.0.1:%d/index.html?probe%s" % (PORT, extra))
 	print("gl:", pg.evaluate("""() => { const c = document.createElement('canvas').getContext('webgl2');
