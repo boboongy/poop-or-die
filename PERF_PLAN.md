@@ -77,3 +77,42 @@ A desktop quality tier means the game can look different from the screenshots so
   wet floor, a Jijio face. A perf win that ruins the look is not a win.
 - `bash tests/run.sh` in full: `liminal_lighting.gd` is touched by the web/compat tests and the shot tests.
 - Report Run / Seen / Felt with the sample size (how many seconds sampled, how many runs), never "feels smoother".
+
+## MEASURED 2026-10-10 (`tests/probe_fullscreen_fps.gd`, Level 1, default camera, vsync off, OBS closed, AC 49 %, Balanced plan)
+
+Run: a real Forward+ window, 8-10 s per sample, 2-3 samples per setting, the median reported. Machine: Ryzen 5 7430U +
+AMD Radeon integrated, desktop 1920x1200.
+
+**Baseline (3 x 10 s): 1280x720 = 23.6 FPS, 1920x1080 = 17.4 FPS.** 2.25x the pixels costs only 26 %, so the owner's
+"10 FPS" included the OBS software-x264 overhead; the game alone is 17.
+
+**The diagnosis above was WRONG about which setting is to blame.** One setting at a time at 1080p changed nothing:
+MSAA 2x 18.5 | MSAA off + FXAA 17.7 | SSR off 18.1 | SSAO off 16.4 | fog off 17.1 | all 10 shadows off 17.6 |
+nearest-1 shadow 17.4 | SDFGI off 22.1. Everything off at once, though, gave 110 FPS at scale 0.5 and 68 at scale 1.0.
+**This is memory-bandwidth saturation on an APU: with the stack on, removing one effect only lets the others fill the
+gap, so a single-factor ladder measures ~0 for everything. Cut the WHOLE per-pixel stack, or nothing.**
+
+Shadows look free in the first table and cost 19 FPS in the second: **a per-pixel probe must be re-run once the stack is
+off, in the regime the game will actually ship in.** Draw calls say nothing here (shadows off: 7000 -> 591 draw calls,
++0.2 FPS).
+
+With MSAA + SSR + SSAO + SDFGI off and ambient 1.2 compensating the lost bounce, at full 1920x1080:
+
+| Also kept | 1080p median | Look kept |
+|---|---|---|
+| fog 20 m + glow + **all 10 shadows** | **40.6 FPS** | haze, glow, every ceiling-grid shadow |
+| glow + all 10 shadows (no fog) | 45.3 FPS | no green haze |
+| all 10 shadows only | 49.2 FPS | no haze, no glow |
+| nearest-1 shadow only | 63.3 FPS | one lit panel |
+| no shadows | 68.1 FPS | flat |
+
+**BUILT 2026-10-10 (option A, `scripts/liminal_lighting.gd`, test `tests/test_perf_tier.gd`):** the game samples its own
+frame rate once per launch (90 warm-up frames, then the median of 3 s) and drops to MEDIUM below 35 FPS. The verdict is a
+static var, so it survives a retry or the next level and can NEVER switch mid-recording. `--perf=high|med|low` overrides it.
+In a real 1080p window: `PERF TIER: 16 FPS -> MEDIUM`, then **37.6 FPS measured over 2 x 10 s** (`--perf=high` 16.3 on the
+same camera). **The ambient is 0.5, not the web build's 1.2:** a 2x2 contact sheet showed 1.2 and 0.8 washing the room flat
+(the web tier has no lamps to add to; this one keeps all 10). Owner still to judge the look.
+
+**DECIDED: the tier is row 1 (40.6 FPS, 2.4x the baseline).** It clears the 30 FPS bar with room for OBS, keeps the
+green haze, the glow and every shadow, and needs no render-scale drop - only SDFGI's bounce is traded for ambient 1.2.
+Row 2 is the fallback if OBS eats more than 10 FPS.

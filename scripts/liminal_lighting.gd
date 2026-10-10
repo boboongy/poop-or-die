@@ -39,6 +39,29 @@ const AnimThrottle := preload("res://scripts/anim_throttle.gd")
 const COMPAT_SCALE := 0.75
 static var force_compat := false ## tests: act as the web build even under the headless renderer
 
+## The automatic DESKTOP tier (owner's option A, 2026-10-10; numbers in PERF_PLAN.md "MEASURED"). The full look runs at
+## 17 FPS at 1920x1080 on an integrated Radeon, which blocks the YouTube capture, so the game samples its OWN frame rate
+## once per launch and drops to MEDIUM if the machine cannot afford the look.
+## Measured at 1080p: HIGH 17.4 FPS -> MEDIUM 40.6 FPS, with the haze, the glow and all 10 ceiling-grid shadows kept.
+## Only SDFGI's bounced light is traded away (ambient takes over, exactly as the web build does).
+## Why one sample and never again: a tier that re-decides could switch quality in the middle of a recording (the owner's
+## stated risk). The verdict is stored in a STATIC var, so it also survives a retry or the jump to the next level.
+const PERF_BAR_FPS := 35.0 ## the full stack above this = the machine can afford HIGH (the bar for the video is 30)
+const PERF_WARMUP_FRAMES := 90 ## shader compilation makes the first second far slower than the game ever is again
+const PERF_SAMPLE_SECONDS := 3.0
+const PERF_FOG_LENGTH := 20.0 ## m: MEDIUM keeps the green haze at half its length
+## x ambient_energy (0.2) = 0.5. NOT the web build's COMPAT_AMBIENT (6.0 -> 1.2): the web renderer has no lamps to speak of,
+## while this tier keeps all 10 shadow-casting spots, so 1.2 on top of them washed the room flat (2x2 contact sheet at 1080p,
+## 2026-10-10: 1.2 and 0.8 both lost the dark far corridor; 0.5 matches HIGH's mood and still lifts the characters).
+const PERF_AMBIENT := 2.5
+const LOW_SCALE := 0.8 ## only reachable with --perf=low: 3D drawn at 0.8, the HUD stays sharp (stretch mode canvas_items)
+static var tier_locked := false ## tests read and reset these two
+static var tier := Quality.HIGH
+var _perf_warmup := 0
+var _perf_fps: Array[float] = []
+var _perf_elapsed := 0.0
+var _measuring := false
+
 var _spots: Array[SpotLight3D] = []
 var _shadow_wait := 0.0
 var _throttle: Node = null
@@ -53,10 +76,22 @@ func _ready() -> void:
 	_build_reflection_probe()
 	_build_hum()
 	world_env.environment = _build_environment()
-	# Tile grids shimmer badly at a distance without these.
-	get_viewport().msaa_3d = Viewport.MSAA_4X
+	# Anisotropic 16x is what fixes the tile grids' TEXTURE shimmer at a distance, and it is cheap, so every tier keeps it.
+	# MSAA (geometry edges) is the expensive half and is set per tier in apply_quality; MEDIUM uses FXAA instead.
 	get_viewport().anisotropic_filtering_level = Viewport.ANISOTROPY_16X
-	apply_quality(quality)
+	var forced := _forced_tier()
+	if is_compat(): # the web build has its own cut-down path and never measures
+		apply_quality(quality)
+	elif forced >= 0:
+		tier = forced as Quality
+		tier_locked = true
+		print("PERF TIER: --perf -> ", Quality.keys()[tier])
+		apply_quality(tier)
+	elif tier_locked: # decided earlier this launch (a retry or the next level reloads this scene)
+		apply_quality(tier)
+	else:
+		apply_quality(Quality.HIGH) # measure the full look, then decide in _process
+		_measuring = true
 
 
 func apply_quality(q: Quality) -> void:
@@ -64,10 +99,14 @@ func apply_quality(q: Quality) -> void:
 	var env := world_env.environment
 	var high := q == Quality.HIGH
 	var medium := q != Quality.LOW
+	# Measured 2026-10-10 (PERF_PLAN.md): one effect at a time changed NOTHING at 1080p on an APU (bandwidth saturation lets
+	# the remaining effects fill the gap), so MEDIUM drops the whole per-pixel stack at once and keeps what carries the look:
+	# the haze (shorter), the glow and every ceiling-grid shadow. 40.6 FPS against HIGH's 17.4.
 	env.sdfgi_enabled = high
-	env.ssr_enabled = medium
-	env.ssao_enabled = medium
+	env.ssr_enabled = high
+	env.ssao_enabled = high
 	env.volumetric_fog_enabled = medium
+	env.volumetric_fog_length = 40.0 if high else PERF_FOG_LENGTH
 	for spot in _spots:
 		spot.shadow_enabled = medium
 	# Stage 8 web build: the Compatibility renderer has no SDFGI/SSR/volumetric fog, and without the bounced light the characters were
@@ -94,10 +133,16 @@ func apply_quality(q: Quality) -> void:
 			if OS.has_feature("web"):
 				add_child(preload("res://scripts/web_probe.gd").new())
 	else:
-		env.ambient_light_energy = ambient_energy
+		# Desktop. Below HIGH there is no SDFGI bounce, so ambient takes over (PERF_AMBIENT, judged on a contact sheet),
+		# and FXAA replaces MSAA.
+		env.ambient_light_energy = ambient_energy * (1.0 if high else PERF_AMBIENT)
 		env.tonemap_exposure = 1.0
 		env.adjustment_contrast = 1.1
 		env.adjustment_saturation = 0.9
+		get_viewport().msaa_3d = Viewport.MSAA_4X if high else Viewport.MSAA_DISABLED
+		get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED if high else Viewport.SCREEN_SPACE_AA_FXAA
+		get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+		get_viewport().scaling_3d_scale = LOW_SCALE if q == Quality.LOW else 1.0
 		for spot in _spots:
 			spot.light_energy = light_energy
 
@@ -121,7 +166,42 @@ func _update_shadow_light() -> void:
 		spot.shadow_enabled = spot == best and quality != Quality.LOW
 
 
+## `--perf=high|med|low` on the command line (the owner's recording override): -1 when it was not given.
+static func _forced_tier() -> int:
+	var args: Array = OS.get_cmdline_args() + OS.get_cmdline_user_args()
+	for a in args:
+		if not String(a).begins_with("--perf="):
+			continue
+		match String(a).trim_prefix("--perf=").to_lower():
+			"high": return Quality.HIGH
+			"med", "medium": return Quality.MEDIUM
+			"low": return Quality.LOW
+	return -1
+
+
+## Option A: sample the real frame rate once, then lock the tier for the whole launch.
+func _measure_tier(delta: float) -> void:
+	if _perf_warmup < PERF_WARMUP_FRAMES:
+		_perf_warmup += 1
+		return
+	_perf_elapsed += delta
+	_perf_fps.append(1.0 / maxf(delta, 0.0001))
+	if _perf_elapsed < PERF_SAMPLE_SECONDS:
+		return
+	_measuring = false
+	_perf_fps.sort()
+	var median: float = _perf_fps[_perf_fps.size() / 2] # the median, so one stutter cannot demote a fast machine
+	tier = Quality.HIGH if median >= PERF_BAR_FPS else Quality.MEDIUM
+	tier_locked = true
+	print("PERF TIER: %.0f FPS median over %.1f s (%d frames) -> %s" % [
+		median, _perf_elapsed, _perf_fps.size(), Quality.keys()[tier]])
+	if tier != Quality.HIGH:
+		apply_quality(tier)
+
+
 func _process(delta: float) -> void:
+	if _measuring:
+		_measure_tier(delta)
 	if not is_compat():
 		return
 	_shadow_wait -= delta

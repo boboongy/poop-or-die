@@ -46,7 +46,7 @@ Working method: `.claude/skills/build-verify-workflow/SKILL.md` (a 60-line core 
 
 ## Next steps (in order)
 -3. **Workflow measured per feature + token source (HISTORY):** `workflow_stats.py --features|--costs`. Owner's calls: run the A/B test (`references/ab-test.md`); MCP servers off in this project? (13 % of tokens is fixed per call).
--2. **FULLSCREEN FPS = TOP (owner 2026-10-10): 20 FPS windowed, 10 at 1080p, blocks the video. Plan + ladder: `PERF_PLAN.md`.** Script: `VIDEO_SCRIPT.md`.
+-2. **FULLSCREEN FPS: BUILT 2026-10-10, owner has NOT seen it. 1080p 17.4 -> 37.6 FPS** (automatic tier, option A, `liminal_lighting.gd`; probe `tests/probe_fullscreen_fps.gd`, test `test_perf_tier.gd`, numbers in `PERF_PLAN.md`). **Owner to judge: MEDIUM has no SDFGI bounce and ambient 0.5 instead (contact sheet said 1.2 washed it flat), no MSAA (FXAA), no SSR/SSAO; the haze, the glow and all 10 shadows are KEPT.** `--perf=high|med|low` forces a tier for a recording. **The owner's "10 FPS" included OBS software x264: record with hardware encode.** Script: `VIDEO_SCRIPT.md`.
 -1. **Web water: BLACK bug fixed, toned-down colour NOT seen.** `flood_water_web.gdshader`; HISTORY session 5.
 -0.5. **NEXT: WEB SPEED 2 (>= 20 FPS, Chrome, all levels; plan OK):** no shadows + feet blob, merge scenery, hide Jijios > 18 m; `tools/web_fps.py`. L3 Chrome 32-40 FPS, later 11-16 the same night (cause unknown: remeasure).
 0. **Owner playtest** (in the editor AND `build/web` in a browser): queue clips, mission shouts (13 lines, may reject), WASD+Space fights, the loss patch + 1 s cut, dance feedback, the web look and FPS.
