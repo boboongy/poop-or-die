@@ -228,3 +228,27 @@ Three honest options for the owner (none is Claude's to pick):
   no gameplay or asset change, the whole cost is sharpness.
 - **(b) Cheaper characters** (a low-poly web Jijio from the factory, or a smaller crowd on web): worth +4 to +8 FPS.
 - **(c) Accept the web build as a slow demo** and keep the desktop build as the real one.
+
+### Option (a) SHIPPED - the owner picked it 2026-10-11, and here is what it really gave
+
+`html/canvas_resize_policy=1` (Project) + `html/head_include` CSS that stretches `#canvas` to the window keeping 16:9,
+and `liminal_lighting.gd WEB_CANVAS` (1280x720) asks for the size from the game side. Desktop is untouched: the change is
+web-only and project.godot keeps its 1152x648 2D base.
+
+**Measured in Chrome, browser viewport 1920x1080 (the real full-screen case), 2 x 5 s per level, `tools/web_fps.py`:**
+
+| Level | 1080p canvas (before) | **720p canvas stretched to 1080p (now)** | a 720p WINDOW (the old row) |
+|---|---|---|---|
+| L1 | 13.2 | **16.8 - 17.4** | 16.4 |
+| L2 | 13.2 | **15.8 - 19.2** | 19.8 |
+| L3 | 8.6 | **11.8 - 12.8** | 14.6 |
+| L4 | 8.4 | **10.6 - 11.8** | 12.4 |
+| L5 | 9.8 | **16.0 - 16.2** | 17.0 |
+
+Read: **+27 % to +63 % (+3 to +6 FPS), and it keeps most but not all of the 720p-window gain** - L3 lost 2 FPS against a
+real 720p window and L5 kept all of it. That gap is the page compositing, which is still charged at 1920x1080 however small
+the canvas is, exactly as the 1080p-at-scale-0.5 row predicted. Draw calls are unchanged (213-360), as expected: the canvas
+size is a per-pixel lever, not a per-object one. **Still short of 20 FPS except L2's best run**; L3/L4 (the flood and the
+shooter, the two heaviest levels) sit at 11-13. The next lever, if the owner wants one, is option (b) cheaper characters.
+Seen: `tools/web_fps.py`'s own 1080p page screenshots, all 5 levels - the game fills the page, 16:9 is preserved (no
+stretch distortion), the HUD and the dialogue text stay readable.

@@ -37,6 +37,13 @@ const COMPAT_SATURATION := 1.0
 
 const AnimThrottle := preload("res://scripts/anim_throttle.gd")
 const COMPAT_SCALE := 0.75
+## Web speed 2, the owner's option (a) 2026-10-11: the browser charges for the canvas it COMPOSITES, not only for the 3D it
+## draws. Measured in Chrome (PERF_PLAN.md): 1920x1080 window 8.4-13.2 FPS, 1280x720 window 12.4-19.8, while a 1080p window
+## at scaling_3d_scale 0.5 drew the same 960x540 of 3D and stayed slow (10.2-16.2) - the HUD, the canvas blit and the page
+## compositing are all charged at the window size. So the web build fixes the canvas at 720p and lets the page CSS stretch it
+## to whatever the window is (`html/canvas_resize_policy=1` + `html/head_include` in export_presets.cfg). The whole cost is
+## sharpness; no gameplay and no asset changes. Desktop is untouched (project.godot keeps its 1152x648 2D base).
+const WEB_CANVAS := Vector2i(1280, 720)
 static var force_compat := false ## tests: act as the web build even under the headless renderer
 
 ## The automatic DESKTOP tier (owner's option A, 2026-10-10; numbers in PERF_PLAN.md "MEASURED"). The full look runs at
@@ -80,6 +87,10 @@ func _ready() -> void:
 	get_viewport().anisotropic_filtering_level = Viewport.ANISOTROPY_16X
 	var forced := _forced_tier()
 	if is_compat(): # the web build has its own cut-down path and never measures
+		# Only the real browser: the canvas is the page's, so the size has to be asked for from the game side (the export
+		# preset's "Project" policy starts it at the project size). Headless and native compat keep their own window.
+		if OS.has_feature("web") and DisplayServer.window_get_size() != WEB_CANVAS:
+			DisplayServer.window_set_size(WEB_CANVAS)
 		apply_quality(quality)
 	elif forced >= 0:
 		tier = forced as Quality

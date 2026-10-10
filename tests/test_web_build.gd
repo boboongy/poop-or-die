@@ -96,6 +96,15 @@ func _init() -> void:
 	T.check(manual == jijios.size() * 90, "every Jijio's AnimationPlayer is driven by the throttle (%d of %d samples)" % [manual, jijios.size() * 90])
 	T.check(far > 0 and max_owed <= 3.0 / 60.0 + 0.01, "far Jijios met %d times; the most animation time owed %.3f s (at most 3 frames)" % [far, max_owed])
 
+	# 6. Web speed 2, the owner's option (a) 2026-10-11: the canvas is FIXED at 720p and the page stretches it to the window.
+	# Nothing inside the engine can see the browser page from a headless run, so this is a text check on the export preset
+	# (the three pieces that have to stay together) plus the size the game asks for. Chrome numbers: PERF_PLAN.md "Web speed 2".
+	var preset := FileAccess.get_file_as_string("res://export_presets.cfg")
+	var policy_ok := preset.contains("html/canvas_resize_policy=1")
+	var css_ok := preset.contains("#canvas{") and preset.contains("!important")
+	T.check(policy_ok and css_ok and Lighting.WEB_CANVAS == Vector2i(1280, 720),
+		"the web preset fixes the canvas at 720p and stretches it (policy=1 %s, CSS %s, WEB_CANVAS %s)" % [policy_ok, css_ok, Lighting.WEB_CANVAS])
+
 	Lighting.force_compat = false
 	WebMerge.force = false
 	lvl.queue_free()
