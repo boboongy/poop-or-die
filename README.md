@@ -1,4 +1,4 @@
-# Poop or Die
+# Don't Poop Your Pants
 
 ### [▶ Play in your browser](https://boboongy.github.io/poop-or-die/) &nbsp;|&nbsp; [⬇ Download for Windows](https://github.com/boboongy/poop-or-die/releases/latest/download/PoopOrDie-Windows.zip)
 
